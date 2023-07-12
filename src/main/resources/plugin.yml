@@ -1,0 +1,3 @@
+name: OPProtector
+version: '${project.version}'
+main: org.kasun.opprotector.OPProtector
