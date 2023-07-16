@@ -5,6 +5,7 @@ import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.Configs.ConfigManager;
 import org.kasun.opprotector.Listners.ListnerManager;
 import org.kasun.opprotector.Punishments.PunishmentManager;
+import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 public class MainManager {
     ConfigManager configManager;
@@ -12,6 +13,8 @@ public class MainManager {
     PunishmentManager punishmentManager;
     TempAuth tempAuth;
     CommandsManager commandsManager;
+
+    VerificationProcessManager verificationProcessManager;
     OPProtector plugin = OPProtector.getInstance();
     public MainManager() {
         configManager = new ConfigManager();
@@ -19,8 +22,7 @@ public class MainManager {
         punishmentManager = new PunishmentManager();
         commandsManager = new CommandsManager();
         tempAuth = new TempAuth();
-        //testing code
-
+        verificationProcessManager = new VerificationProcessManager();
 
     }
 
@@ -42,6 +44,10 @@ public class MainManager {
 
     public CommandsManager getCommandsManager() {
         return commandsManager;
+    }
+
+    public VerificationProcessManager getVerificationProcessManager() {
+        return verificationProcessManager;
     }
 
 }

@@ -21,11 +21,13 @@ public class PasswordGui {
     private Player player;
     private boolean isPasswordCorrect = false;
     private int attempts = 0;
+    private VerificationProcessManager verificationProcessManager;
 
     public PasswordGui(String title, String correctPassword, Player player) {
         this.title = title;
         this.correctPassword = correctPassword;
         this.player = player;
+        verificationProcessManager = OPProtector.getInstance().getMainManager().getVerificationProcessManager();
     }
 
     public void show(){
@@ -51,7 +53,7 @@ public class PasswordGui {
 
                 isPasswordCorrect = true;
                 player.closeInventory();
-                VerificationProcessManager.next(player);
+                verificationProcessManager.next(player);
 
             }else{
                 isPasswordCorrect = false;
@@ -68,7 +70,7 @@ public class PasswordGui {
                 if (attempts < 20){
                     isPasswordCorrect = true;
                     player.closeInventory();
-                    VerificationProcessManager.next(player);
+                    verificationProcessManager.next(player);
                 }
             }
         });

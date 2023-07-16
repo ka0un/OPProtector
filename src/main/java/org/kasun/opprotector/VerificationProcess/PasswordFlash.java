@@ -40,8 +40,7 @@ public class PasswordFlash {
         }.runTaskTimer(plugin, 0, 10); // Change the flashing interval if desired (10 ticks = 0.5 seconds)
 
         countdownTask = new BukkitRunnable() {
-            int remainingTime = (int) plugin.getMainManager().getConfigManager().getMainConfig().getConfigMap().get("password-enter-interval-secounds");
-
+            int remainingTime = plugin.getMainManager().getConfigManager().getMainConfig().interval_secounds;
             @Override
             public void run() {
                 if (remainingTime > 0) {

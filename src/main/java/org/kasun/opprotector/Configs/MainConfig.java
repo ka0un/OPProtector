@@ -44,6 +44,10 @@ public class MainConfig {
         plugin.saveDefaultConfig();
         configFile = new File(plugin.getDataFolder(), "config.yml");
         config = YamlConfiguration.loadConfiguration(configFile);
+
+        loadMainSettings();
+        loadPasswordSettings();
+        loadLockdownSettings();
     }
 
     public void loadMainSettings(){

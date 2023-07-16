@@ -18,7 +18,7 @@ public class PasswordVerification {
     private OPProtector plugin = OPProtector.getInstance();
     private boolean isgui;
     public PasswordVerification(Player player) {
-        isgui = (boolean) plugin.getMainManager().getConfigManager().getMainConfig().getConfigMap().get("use-gui-for-password");
+        isgui = plugin.getMainManager().getConfigManager().getMainConfig().use_gui;
         if (isgui) {
             String password = OperatorConfig.getOperatorConfig(player.getName()).getPassword();
             PasswordGui passwordGui = new PasswordGui("Enter The Password", password, player);

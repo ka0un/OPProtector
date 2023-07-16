@@ -3,6 +3,7 @@ package org.kasun.opprotector.Listners;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -15,7 +16,7 @@ import java.util.List;
 public class PlayerCommand implements Listener {
     Lockdown lockdown;
     OPProtector plugin = OPProtector.getInstance();
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerCommandProcess(PlayerCommandPreprocessEvent e){
         lockdown = plugin.getMainManager().getPunishmentManager().getLockdown();
 
@@ -45,7 +46,7 @@ public class PlayerCommand implements Listener {
             Player player = Bukkit.getPlayer(result);
 
             if (player != null){
-                VerificationProcessManager verificationProcessManager = new VerificationProcessManager();
+                VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
                 verificationProcessManager.start(player);
             }
 
