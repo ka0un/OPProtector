@@ -1,7 +1,7 @@
 package org.kasun.opprotector;
 
-import jdk.tools.jmod.Main;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kasun.opprotector.Configs.OperatorConfig;
 
 public final class OPProtector extends JavaPlugin {
     private static OPProtector instance;
@@ -34,5 +34,9 @@ public final class OPProtector extends JavaPlugin {
 
     public boolean isFirstTime() {
         return isFirstTime;
+    }
+
+    public MainManager getMainManager() {
+        return mainManager;
     }
 }

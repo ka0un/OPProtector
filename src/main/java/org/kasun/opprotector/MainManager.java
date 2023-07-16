@@ -1,24 +1,47 @@
 package org.kasun.opprotector;
 
+import org.kasun.opprotector.AuthObjects.TempAuth;
+import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.Configs.ConfigManager;
-import org.kasun.opprotector.Configs.CustomConfig;
+import org.kasun.opprotector.Listners.ListnerManager;
+import org.kasun.opprotector.Punishments.PunishmentManager;
 
 public class MainManager {
     ConfigManager configManager;
-    CustomConfig customConfig;
+    ListnerManager listnerManager;
+    PunishmentManager punishmentManager;
+    TempAuth tempAuth;
+    CommandsManager commandsManager;
     OPProtector plugin = OPProtector.getInstance();
     public MainManager() {
         configManager = new ConfigManager();
-        customConfig = new CustomConfig();
-        String string = getConfigManager().getMainConfig().getConfigMap().get("test").toString();
-        System.out.println("config test : " + string);
+        listnerManager = new ListnerManager();
+        punishmentManager = new PunishmentManager();
+        commandsManager = new CommandsManager();
+        tempAuth = new TempAuth();
+        //testing code
+
+
     }
 
     public ConfigManager getConfigManager() {
         return configManager;
     }
 
-    public CustomConfig getCustomConfig() {
-        return customConfig;
+    public ListnerManager getListnerManager() {
+        return listnerManager;
     }
+
+    public PunishmentManager getPunishmentManager() {
+        return punishmentManager;
+    }
+
+    public TempAuth getAuthorizedPlayers() {
+        return tempAuth;
+    }
+
+    public CommandsManager getCommandsManager() {
+        return commandsManager;
+    }
+
 }

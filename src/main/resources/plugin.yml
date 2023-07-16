@@ -1,3 +1,8 @@
 name: OPProtector
 version: '${project.version}'
 main: org.kasun.opprotector.OPProtector
+api-version: 1.13
+commands:
+  pas:
+    description: Operator Password
+    usage: /<command> password

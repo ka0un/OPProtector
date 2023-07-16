@@ -1,24 +1,18 @@
 package org.kasun.opprotector.Configs;
-
-
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.kasun.opprotector.OPProtector;
-
-import java.io.File;
+import java.io.*;
 import java.util.HashMap;
 
 public class CustomConfig {
     OPProtector plugin = OPProtector.getInstance();
-    private HashMap<String, Object> Passwords = new HashMap<>();
-    private HashMap<String, Object> Messages = new HashMap<>();
-    private HashMap<String, Object> IpList = new HashMap<>();
-
+    private HashMap<String, Object> Messages;
+    private HashMap<String, Object> IpList;
     private File fileIp;
     private File fileMsg;
-    private File filePass;
     private YamlConfiguration yamlConfigurationIp;
     private YamlConfiguration yamlConfigurationMsg;
-    private YamlConfiguration yamlConfigurationPass;
+
 
     public CustomConfig() {
         if (plugin.isFirstTime()) {
@@ -28,27 +22,25 @@ public class CustomConfig {
     }
 
     private void loadConfig() {
+        Messages = new HashMap<>();
+        IpList = new HashMap<>();
         fileIp = new File(plugin.getDataFolder() + "iplist.yml");
         fileMsg = new File(plugin.getDataFolder() + "messages.yml");
-        filePass = new File(plugin.getDataFolder() + "passwords.yml");
         yamlConfigurationIp = YamlConfiguration.loadConfiguration(fileIp);
         yamlConfigurationMsg = YamlConfiguration.loadConfiguration(fileMsg);
-        yamlConfigurationPass = YamlConfiguration.loadConfiguration(filePass);
         yamlConfigurationIp.getKeys(false).forEach(key -> {
             IpList.put(key, yamlConfigurationIp.get(key));
         });
         yamlConfigurationMsg.getKeys(false).forEach(key -> {
             Messages.put(key, yamlConfigurationMsg.get(key));
         });
-        yamlConfigurationPass.getKeys(false).forEach(key -> {
-            Passwords.put(key, yamlConfigurationPass.get(key));
-        });
     }
+
 
     private void createconfigfiles() {
         plugin.saveResource("iplist.yml", false);
         plugin.saveResource("messages.yml", false);
-        plugin.saveResource("passwords.yml", false);
+        plugin.saveResource("operators.yml", false);
     }
 
     public void saveIpList() {
@@ -69,15 +61,6 @@ public class CustomConfig {
         } catch (Exception ignored) {}
     }
 
-    public void savePasswords() {
-        Passwords.forEach((key, value) -> {
-            yamlConfigurationPass.set(key, value);
-        });
-        try {
-            yamlConfigurationPass.save(filePass);
-        } catch (Exception ignored) {}
-    }
-
     public HashMap<String, Object> getIpList() {
         return IpList;
     }
@@ -85,11 +68,5 @@ public class CustomConfig {
     public HashMap<String, Object> getMessages() {
         return Messages;
     }
-
-    public HashMap<String, Object> getPasswords() {
-        return Passwords;
-    }
-
-
 
 }

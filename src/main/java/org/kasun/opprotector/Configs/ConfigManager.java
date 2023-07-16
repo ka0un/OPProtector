@@ -7,7 +7,7 @@ public class ConfigManager {
     public ConfigManager() {
         mainConfig = new MainConfig();
         customConfig = new CustomConfig();
-
+        OperatorConfig.loadOperators();
     }
 
     public MainConfig getMainConfig() {

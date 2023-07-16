@@ -1,1 +1,48 @@
-test: "kasun"
+#
+# ██████╗ ██████╗ ██████╗         OPProtector 2023 (Operator Security System)
+# ██╔═══██╗██╔══██╗██╔══██╗       Version: 1.0.0
+# ██║   ██║██████╔╝██████╔╝       Contributors: Kasun Hapangama(ka0un)
+# ██║   ██║██╔═══╝ ██╔═══╝        GitHub:https://github.com/ka0un/OPProtector
+# ╚██████╔╝██║     ██║            Discord:https://dsc.gg/sundevs
+# ╚═════╝ ╚═╝     ╚═╝             Website: https://ka0un.github.io/OPProtector/
+#
+
+#===============================================================================
+# Main Settings
+#===============================================================================
+main-settings:
+  prefix: "&8[&cOPProtector&8] &7"
+
+#===============================================================================
+# Password Settings
+#===============================================================================
+
+password-settings:
+  session-hours: 1
+  use-gui: true
+  interval-secounds: 60
+  pas-command: "pas"
+
+#===============================================================================
+# Lockdown Settings
+#===============================================================================
+lockdown-settings:
+  block-player-move: true
+  block-break-blocks: true
+  block-place-blocks: true
+  block-player-commands: true
+  block-item-drop: true
+  block-damage: true
+  allow-flight: false
+  commands-whitelist:
+    - "/pas"
+    - "/auth"
+    - "/register"
+    - "/login"
+    - "/changepassword"
+    - "/changepass"
+#===============================================================================
+# Punishment Settings
+#===============================================================================
+
+
