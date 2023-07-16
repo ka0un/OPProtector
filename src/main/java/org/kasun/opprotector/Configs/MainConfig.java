@@ -45,6 +45,10 @@ public class MainConfig {
 
     public List<String>
     commands_whitelist,
+    not_in_operators_list,
+    have_blacklisted_perms,
+    admin_ip_changed,
+    failed_password_timeout,
     blacklisted_permissions;
 
 
@@ -60,6 +64,7 @@ public class MainConfig {
         loadPasswordSettings();
         loadLockdownSettings();
         loadScannerSettings();
+        loadCommandsSettings();
     }
 
     public void loadMainSettings(){
@@ -98,6 +103,15 @@ public class MainConfig {
         scan_on_join = scanner.getBoolean("scan-on-join");
         blacklisted_permissions = new ArrayList<>(scanner.getStringList("blacklisted-permissions"));
         live_scanner_interval_secounds = scanner.getInt("live-scanner-interval-secounds");
+    }
+
+    public void loadCommandsSettings(){
+        ConfigurationSection commands = config.getConfigurationSection("commands-settings");
+        not_in_operators_list = new ArrayList<>(commands.getStringList("not-in-operators-list"));
+        have_blacklisted_perms = new ArrayList<>(commands.getStringList("have-blacklisted-perms"));
+        admin_ip_changed = new ArrayList<>(commands.getStringList("admin-ip-changed"));
+        failed_password_timeout = new ArrayList<>(commands.getStringList("failed-password-timeout"));
+
     }
 
 

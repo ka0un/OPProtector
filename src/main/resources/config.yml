@@ -26,6 +26,7 @@ password-settings:
 #===============================================================================
 # Lockdown Settings
 #===============================================================================
+
 lockdown-settings:
   block-player-move: true
   block-break-blocks: true
@@ -46,6 +47,7 @@ lockdown-settings:
 #===============================================================================
 # Scanner Settings
 #===============================================================================
+
 scanner-settings:
   scan-on-join: true
   scan-on-player-op-command: true
@@ -64,4 +66,19 @@ scanner-settings:
     - "luckperms.*"
     - "lp.*"
 
+#===============================================================================
+# Commands Settings
+#===============================================================================
+
+commands-settings:
+  not-in-operators-list:
+    - 'deop %player%'
+
+  have-blacklisted-perms:
+    - 'deop %player%'
+    - 'lp user %player% permission clear *'
+
+  admin-ip-changed:
+
+  failed-password-timeout:
 

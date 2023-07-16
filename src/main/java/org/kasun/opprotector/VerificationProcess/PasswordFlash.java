@@ -8,6 +8,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
+import org.kasun.opprotector.Utils.CommandExecutor;
+
+import java.util.List;
 
 public class PasswordFlash {
     private BukkitTask titleTask;
@@ -47,7 +50,9 @@ public class PasswordFlash {
                     player.sendMessage(ChatColor.RED + "You have " + remainingTime + " seconds to enter the password.(/pas <password>)");
                     remainingTime--;
                 } else {
-                    Ban ban = new Ban(player, "You didnt enter the password in time", "Unautharized Access");
+                    List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().failed_password_timeout;
+                    CommandExecutor commandExecutor = new CommandExecutor(player, commands);
+                    player.kickPlayer(ChatColor.RED + "You have failed to enter the password in time.");
                     cancel();
                 }
             }

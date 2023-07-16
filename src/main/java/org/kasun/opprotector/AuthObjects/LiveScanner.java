@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
+import org.kasun.opprotector.Utils.CommandExecutor;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class LiveScanner {
                                         try{
                                             if (player.hasPermission(permission)){
                                                 if (!opnames.contains(player.getName())){
+                                                    List<String> haveBlacklistedPermsCommands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
+                                                    CommandExecutor commandExecutor = new CommandExecutor(p, haveBlacklistedPermsCommands);
                                                     Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
                                                 }
                                             }
@@ -56,11 +59,12 @@ public class LiveScanner {
 
                                 //is listed in operators.yml
                                 if (!opnames.contains(player.getName())){
+                                    List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
+                                    CommandExecutor commandExecutor = new CommandExecutor(p, commands);
                                     Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
                                 }
 
                                 Bukkit.getScheduler().runTask(plugin, () -> {
-                                    System.out.println("Verifying " + player.getName() + " from LiveScanner");
                                     verify(player);
                                 });
 

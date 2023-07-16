@@ -23,9 +23,6 @@ public class PasswordVerification {
             String password = OperatorConfig.getOperatorConfig(player.getName()).getPassword();
             PasswordGui passwordGui = new PasswordGui("Enter The Password", password, player);
             passwordGui.show();
-        }else{
-            player.sendMessage("Enter the password.");
-
         }
     }
 
