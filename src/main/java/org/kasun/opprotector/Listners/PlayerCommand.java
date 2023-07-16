@@ -40,6 +40,9 @@ public class PlayerCommand implements Listener {
         }
 
         if (e.getMessage().startsWith("/op")){
+            OPProtector plugin = OPProtector.getInstance();
+            boolean allow = plugin.getMainManager().getConfigManager().getMainConfig().scan_on_player_op_command;
+            if (!allow) {return;}
             String str = e.getMessage();
             int index = str.indexOf("/op ");
             String result = str.substring(index + 4);

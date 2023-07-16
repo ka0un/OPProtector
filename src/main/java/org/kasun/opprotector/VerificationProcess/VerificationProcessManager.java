@@ -13,34 +13,42 @@ import java.util.List;
 
 public class VerificationProcessManager {
     static private OPProtector plugin = OPProtector.getInstance();
-    private ArrayList<String> blacklistedPermissions;
+    private List<String> blacklistedPermissions;
     static PasswordFlash passwordFlash;
     private ArrayList<Player> inVerification;
     private ArrayList<Player> verifiedPlayers;
+    private boolean allowScanBlackListedPerms;
+    private boolean allowScanCreative;
+
 
 
     public VerificationProcessManager(){
         inVerification = new ArrayList<>();
         verifiedPlayers = new ArrayList<>();
-        blacklistedPermissions = new ArrayList<>();
     }
 
     public void start(Player player){
+        blacklistedPermissions = plugin.getMainManager().getConfigManager().getMainConfig().blacklisted_permissions;
+        allowScanCreative = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_gamemode_creative;
+        allowScanBlackListedPerms = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_blacklisted_permissions;
+
         List<String> opnames = OperatorConfig.getOperatorNames();
 
         //checking for blacklisted permissions
-        for (String permission : blacklistedPermissions){
-            try{
-                if (player.hasPermission(permission)){
-                    if (!opnames.contains(player.getName())){
-                        Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
+        if (allowScanBlackListedPerms){
+            for (String permission : blacklistedPermissions){
+                try{
+                    if (player.hasPermission(permission)){
+                        if (!opnames.contains(player.getName())){
+                            Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
+                        }
                     }
-                }
-            }catch (NullPointerException ignored){}
+                }catch (NullPointerException ignored){}
+            }
         }
 
         //checking for op
-        if (!player.isOp() && !(player.getGameMode() == GameMode.CREATIVE)){
+        if (!player.isOp() && !(player.getGameMode() == GameMode.CREATIVE && allowScanCreative)){
             return;
         }
 

@@ -32,6 +32,7 @@ lockdown-settings:
   block-place-blocks: true
   block-player-commands: true
   block-item-drop: true
+  block-item-pickup: true
   block-damage: true
   allow-flight: false
   commands-whitelist:
@@ -41,8 +42,25 @@ lockdown-settings:
     - "/login"
     - "/changepassword"
     - "/changepass"
+
 #===============================================================================
-# Punishment Settings
+# Scanner Settings
 #===============================================================================
+scanner-settings:
+  scan-on-join: true
+  scan-on-player-op-command: true
+  scan-on-console-op-command: true
+  scan-from-live-scanner: true
+  scan-for-blacklisted-permissions: true
+  scan-for-gamemode-creative: true
+  blacklisted-permissions:
+    - "essentials.*"
+    - "*"
+    - "bukkit.*"
+    - "minecraft.*"
+    - "worldedit.*"
+    - "worldguard.*"
+    - "luckperms.*"
+    - "lp.*"
 
 

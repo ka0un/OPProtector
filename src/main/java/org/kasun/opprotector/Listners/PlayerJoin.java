@@ -11,8 +11,10 @@ import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 public class PlayerJoin implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoin(PlayerJoinEvent e){
-        Player player = e.getPlayer();
         OPProtector plugin = OPProtector.getInstance();
+        boolean allow = plugin.getMainManager().getConfigManager().getMainConfig().scan_on_join;
+        if (!allow) {return;}
+        Player player = e.getPlayer();
         VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
         verificationProcessManager.start(player);
     }

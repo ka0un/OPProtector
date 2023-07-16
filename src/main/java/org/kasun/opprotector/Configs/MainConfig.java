@@ -30,11 +30,21 @@ public class MainConfig {
     block_break_block,
     block_place_block,
     block_item_drop,
+    block_item_pickup,
     block_damage,
-    allow_flight;
+    allow_flight,
+    scan_on_player_op_command,
+    scan_on_console_op_command,
+    scan_from_live_scanner,
+    scan_for_blacklisted_permissions,
+    scan_for_gamemode_creative,
+    scan_on_join;
+
+
 
     public List<String>
-    commands_whitelist;
+    commands_whitelist,
+    blacklisted_permissions;
 
 
 
@@ -48,6 +58,7 @@ public class MainConfig {
         loadMainSettings();
         loadPasswordSettings();
         loadLockdownSettings();
+        loadScannerSettings();
     }
 
     public void loadMainSettings(){
@@ -69,9 +80,21 @@ public class MainConfig {
         block_break_block = lockdown.getBoolean("block-break-block");
         block_place_block = lockdown.getBoolean("block-place-block");
         block_item_drop = lockdown.getBoolean("block-item-drop");
+        block_item_pickup = lockdown.getBoolean("block-item-pickup");
         block_damage = lockdown.getBoolean("block-damage");
         allow_flight = lockdown.getBoolean("allow-flight");
         commands_whitelist = new ArrayList<>(lockdown.getStringList("commands-whitelist"));
+    }
+
+    public void loadScannerSettings(){
+        ConfigurationSection scanner = config.getConfigurationSection("scanner-settings");
+        scan_on_player_op_command = scanner.getBoolean("scan-on-player-op-command");
+        scan_on_console_op_command = scanner.getBoolean("scan-on-console-op-command");
+        scan_from_live_scanner = scanner.getBoolean("scan-from-live-scanner");
+        scan_for_blacklisted_permissions = scanner.getBoolean("scan-for-blacklisted-permissions");
+        scan_for_gamemode_creative = scanner.getBoolean("scan-for-gamemode-creative");
+        scan_on_join = scanner.getBoolean("scan-on-join");
+        blacklisted_permissions = new ArrayList<>(scanner.getStringList("blacklisted-permissions"));
     }
 
 
