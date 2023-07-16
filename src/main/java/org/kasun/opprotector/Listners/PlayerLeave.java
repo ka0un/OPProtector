@@ -12,6 +12,9 @@ public class PlayerLeave implements Listener {
     public void onPlayerLeave(org.bukkit.event.player.PlayerQuitEvent e){
         OPProtector plugin = OPProtector.getInstance();
         VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
+        if (plugin.getServer().getOnlinePlayers().size() == 1) {
+            plugin.getMainManager().getLiveScanner().stop();
+        }
         boolean isinverification = verificationProcessManager.isInVerification(e.getPlayer());
         if (isinverification) {
             PasswordFlash passwordFlash = verificationProcessManager.getPasswordFlash();

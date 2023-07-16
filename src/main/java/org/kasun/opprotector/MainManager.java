@@ -1,5 +1,6 @@
 package org.kasun.opprotector;
 
+import org.kasun.opprotector.AuthObjects.LiveScanner;
 import org.kasun.opprotector.AuthObjects.TempAuth;
 import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.Configs.ConfigManager;
@@ -13,8 +14,8 @@ public class MainManager {
     PunishmentManager punishmentManager;
     TempAuth tempAuth;
     CommandsManager commandsManager;
-
     VerificationProcessManager verificationProcessManager;
+    LiveScanner liveScanner;
     OPProtector plugin = OPProtector.getInstance();
     public MainManager() {
         configManager = new ConfigManager();
@@ -23,6 +24,7 @@ public class MainManager {
         commandsManager = new CommandsManager();
         tempAuth = new TempAuth();
         verificationProcessManager = new VerificationProcessManager();
+        liveScanner = new LiveScanner();
 
     }
 
@@ -48,6 +50,10 @@ public class MainManager {
 
     public VerificationProcessManager getVerificationProcessManager() {
         return verificationProcessManager;
+    }
+
+    public LiveScanner getLiveScanner() {
+        return liveScanner;
     }
 
 }

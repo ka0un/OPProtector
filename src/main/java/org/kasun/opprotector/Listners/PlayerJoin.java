@@ -13,6 +13,11 @@ public class PlayerJoin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e){
         OPProtector plugin = OPProtector.getInstance();
         boolean allow = plugin.getMainManager().getConfigManager().getMainConfig().scan_on_join;
+
+        if (plugin.getServer().getOnlinePlayers().size() == 1) {
+            plugin.getMainManager().getLiveScanner().start();
+        }
+
         if (!allow) {return;}
         Player player = e.getPlayer();
         VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();

@@ -22,7 +22,8 @@ public class MainConfig {
 
     public int
     session_hours,
-    interval_secounds;
+    interval_secounds,
+    live_scanner_interval_secounds;
 
     public boolean
     use_gui,
@@ -83,6 +84,7 @@ public class MainConfig {
         block_item_pickup = lockdown.getBoolean("block-item-pickup");
         block_damage = lockdown.getBoolean("block-damage");
         allow_flight = lockdown.getBoolean("allow-flight");
+
         commands_whitelist = new ArrayList<>(lockdown.getStringList("commands-whitelist"));
     }
 
@@ -95,6 +97,7 @@ public class MainConfig {
         scan_for_gamemode_creative = scanner.getBoolean("scan-for-gamemode-creative");
         scan_on_join = scanner.getBoolean("scan-on-join");
         blacklisted_permissions = new ArrayList<>(scanner.getStringList("blacklisted-permissions"));
+        live_scanner_interval_secounds = scanner.getInt("live-scanner-interval-secounds");
     }
 
 

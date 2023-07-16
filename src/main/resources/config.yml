@@ -51,6 +51,7 @@ scanner-settings:
   scan-on-player-op-command: true
   scan-on-console-op-command: true
   scan-from-live-scanner: true
+  live-scanner-interval-secounds: 5
   scan-for-blacklisted-permissions: true
   scan-for-gamemode-creative: true
   blacklisted-permissions:
