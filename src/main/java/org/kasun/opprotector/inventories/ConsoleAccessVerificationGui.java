@@ -10,29 +10,22 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
-import org.kasun.opprotector.VerificationProcess.VerificationStatus;
 
+public class ConsoleAccessVerificationGui {
+    String otp;
+    Player player;
+    int attempts;
 
-public class PasswordGui {
-    private String title;
-    private String correctPassword;
-    private Player player;
-    private boolean isPasswordCorrect = false;
-    private int attempts = 0;
-    private VerificationProcessManager verificationProcessManager;
-    OPProtector plugin = OPProtector.getInstance();
+    VerificationProcessManager verificationProcessManager;
 
-    public PasswordGui(String title, String correctPassword, Player player) {
-        this.title = title;
-        this.correctPassword = correctPassword;
+    public ConsoleAccessVerificationGui(Player player, String otp){
         this.player = player;
+        this.otp = otp;
         verificationProcessManager = OPProtector.getInstance().getMainManager().getVerificationProcessManager();
     }
-
     public void show(){
 
-
-        AnvilGui gui = new AnvilGui(title);
+        AnvilGui gui = new AnvilGui("Enter OTP That Sent To Console");
         ItemStack itemStack1 = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemMeta itemMeta1 = itemStack1.getItemMeta();
         itemMeta1.setDisplayName(" ");
@@ -50,15 +43,11 @@ public class PasswordGui {
 
         GuiItem item2 = new GuiItem(itemStack2, event -> {
             attempts++;
-            if (gui.getRenameText().equals(correctPassword) || gui.getRenameText().equals(" " + correctPassword)){
-
-                isPasswordCorrect = true;
+            if (gui.getRenameText().equals(otp) || gui.getRenameText().equals(" " + otp)){
                 player.closeInventory();
-                verificationProcessManager.setTo2FA(player);
-
+                verificationProcessManager.setVerified(player);
             }else{
-                isPasswordCorrect = false;
-                player.sendMessage(ChatColor.RED + "You have entered the wrong password.");
+                player.sendMessage(ChatColor.RED + "You have entered the wrong otp.");
             }
         });
         StaticPane pane2 = new StaticPane(0, 0, 1, 1);
@@ -67,24 +56,23 @@ public class PasswordGui {
 
         gui.setOnNameInputChanged(event -> {
             attempts++;
-            if (event.equals(correctPassword) || event.equals(" " + correctPassword)){
-                if (attempts < 20){
-                    isPasswordCorrect = true;
+            if (event.equals(otp) || event.equals(" " + otp)){
+                if (attempts < 10){
                     player.closeInventory();
-                    verificationProcessManager.setTo2FA(player);
+                    verificationProcessManager.setVerified(player);
                 }
             }
         });
         gui.setOnGlobalClick(event -> event.setCancelled(true));
         gui.setOnClose(event -> {
             OPProtector plugin = OPProtector.getInstance();
-            if (verificationProcessManager.getVerificationStatusMap().get(player.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION){
+            if (!plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(player)){
                 gui.show(player);
             }
         });
         gui.show(player);
 
     }
-
-
 }
+
+

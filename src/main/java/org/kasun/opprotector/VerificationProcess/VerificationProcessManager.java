@@ -7,6 +7,7 @@ import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Punishments.Lockdown;
 import org.kasun.opprotector.Utils.CommandExecutor;
+import org.kasun.opprotector.inventories.FactorsGuI;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,7 @@ public class VerificationProcessManager {
     static private OPProtector plugin = OPProtector.getInstance();
     private List<String> blacklistedPermissions;
     static PasswordFlash passwordFlash;
-    private HashMap<Player, VerificationStatus> verificationStatusMap;
+    private HashMap<String, VerificationStatus> verificationStatusMap;
     private boolean allowScanBlackListedPerms;
     private boolean allowScanCreative;
 
@@ -61,18 +62,22 @@ public class VerificationProcessManager {
 
         //checking if player is already verified
         if (plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(player)){
-            VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
-            verificationStatusMap.put(player, VerificationStatus.VERIFIED);
-            return;
+            if (verificationStatusMap.containsKey(player.getName()) && verificationStatusMap.get(player.getName()) == VerificationStatus.VERIFIED){
+                VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
+                return;
+            }
         }
+        System.out.println("doing");
 
         //checking if player is in verification process
-        if (verificationStatusMap.containsKey(player) && verificationStatusMap.get(player) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(player) == VerificationStatus.IN_FACTOR_VERIFICATION){
+        if (verificationStatusMap.containsKey(player.getName()) && verificationStatusMap.get(player.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(player.getName()) == VerificationStatus.IN_FACTOR_VERIFICATION || verificationStatusMap.get(player.getName()) == VerificationStatus.DOING_FACTOR_VERIFICATION){
             return;
         }
 
+        System.out.println("bad");
+
         //start password verification process
-        verificationStatusMap.put(player, VerificationStatus.IN_PASSWORD_VERIFICATION);
+        verificationStatusMap.put(player.getName(), VerificationStatus.IN_PASSWORD_VERIFICATION);
         Lockdown lockdown = plugin.getMainManager().getPunishmentManager().getLockdown();
         lockdown.lockPlayer(player);
         PasswordVerification passwordVerification = new PasswordVerification(player);
@@ -81,13 +86,19 @@ public class VerificationProcessManager {
 
     }
 
-    public void next(Player player){
+    public void setTo2FA(Player player){
         passwordFlash.stopTasks();
+        verificationStatusMap.put(player.getName(), VerificationStatus.IN_FACTOR_VERIFICATION);
+        plugin.getMainManager().getAuthorizedPlayers().addAuthorizedPlayer(player);
+        FactorsGuI factorsGuI = new FactorsGuI();
+        factorsGuI.show(player);
+    }
+
+    public void setVerified(Player player){
         Lockdown lockdown = plugin.getMainManager().getPunishmentManager().getLockdown();
         lockdown.unlockPlayer(player);
-        plugin.getMainManager().getAuthorizedPlayers().addAuthorizedPlayer(player);
         VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
-        verificationStatusMap.put(player, VerificationStatus.VERIFIED);
+        verificationStatusMap.put(player.getName(), VerificationStatus.VERIFIED);
     }
 
 
@@ -95,7 +106,7 @@ public class VerificationProcessManager {
         return passwordFlash;
     }
 
-    public HashMap<Player, VerificationStatus> getVerificationStatusMap() {
+    public HashMap<String, VerificationStatus> getVerificationStatusMap() {
         return verificationStatusMap;
     }
 

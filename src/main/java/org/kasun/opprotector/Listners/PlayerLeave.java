@@ -16,15 +16,15 @@ public class PlayerLeave implements Listener {
     public void onPlayerLeave(org.bukkit.event.player.PlayerQuitEvent e){
         OPProtector plugin = OPProtector.getInstance();
         VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
-        HashMap<Player, VerificationStatus> verificationStatusMap = verificationProcessManager.getVerificationStatusMap();
+        HashMap<String, VerificationStatus> verificationStatusMap = verificationProcessManager.getVerificationStatusMap();
         if (plugin.getServer().getOnlinePlayers().size() == 1) {
             plugin.getMainManager().getLiveScanner().stop();
         }
-        boolean isinverification = verificationStatusMap.containsKey(e.getPlayer()) && verificationStatusMap.get(e.getPlayer()) == VerificationStatus.IN_PASSWORD_VERIFICATION;
+        boolean isinverification = verificationStatusMap.containsKey(e.getPlayer().getName()) && verificationStatusMap.get(e.getPlayer().getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION;
         if (isinverification) {
             PasswordFlash passwordFlash = verificationProcessManager.getPasswordFlash();
             passwordFlash.stopTasks();
-            verificationStatusMap.remove(e.getPlayer());
+            verificationStatusMap.remove(e.getPlayer().getName());
         }
     }
 }

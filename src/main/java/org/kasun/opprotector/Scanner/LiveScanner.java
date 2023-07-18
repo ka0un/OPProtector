@@ -28,11 +28,11 @@ public class LiveScanner {
         liveScannerTask =  new BukkitRunnable() {
             @Override
             public void run() {
-                HashMap<Player, VerificationStatus> verificationStatusMap = plugin.getMainManager().getVerificationProcessManager().getVerificationStatusMap();
+                HashMap<String, VerificationStatus> verificationStatusMap = plugin.getMainManager().getVerificationProcessManager().getVerificationStatusMap();
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                         Bukkit.getOnlinePlayers().forEach(p -> {
-                            if (!(verificationStatusMap.containsKey(p) && verificationStatusMap.get(p) == VerificationStatus.VERIFIED) || verificationStatusMap.get(p) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(p) == VerificationStatus.IN_FACTOR_VERIFICATION) {
+                            if (!(verificationStatusMap.containsKey(p.getName()) && verificationStatusMap.get(p.getName()) == VerificationStatus.VERIFIED) || verificationStatusMap.get(p.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(p.getName()) == VerificationStatus.IN_FACTOR_VERIFICATION || verificationStatusMap.get(p.getName()) == VerificationStatus.DOING_FACTOR_VERIFICATION ) {
                                 List<String> blacklistedPermissions = plugin.getMainManager().getConfigManager().getMainConfig().blacklisted_permissions;
                                 boolean allowScanCreative = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_gamemode_creative;
                                 boolean allowScanBlackListedPerms = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_blacklisted_permissions;
