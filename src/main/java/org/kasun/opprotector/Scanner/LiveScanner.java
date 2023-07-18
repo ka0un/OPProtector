@@ -1,4 +1,4 @@
-package org.kasun.opprotector.AuthObjects;
+package org.kasun.opprotector.Scanner;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -10,8 +10,10 @@ import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Utils.CommandExecutor;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
+import org.kasun.opprotector.VerificationProcess.VerificationStatus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LiveScanner {
@@ -26,12 +28,11 @@ public class LiveScanner {
         liveScannerTask =  new BukkitRunnable() {
             @Override
             public void run() {
-                ArrayList<Player> verifiedList = plugin.getMainManager().getVerificationProcessManager().getVerifiedPlayers();
-                VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
+                HashMap<Player, VerificationStatus> verificationStatusMap = plugin.getMainManager().getVerificationProcessManager().getVerificationStatusMap();
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                         Bukkit.getOnlinePlayers().forEach(p -> {
-                            if (!verifiedList.contains(p)) {
+                            if (!(verificationStatusMap.containsKey(p) && verificationStatusMap.get(p) == VerificationStatus.VERIFIED) || verificationStatusMap.get(p) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(p) == VerificationStatus.IN_FACTOR_VERIFICATION) {
                                 List<String> blacklistedPermissions = plugin.getMainManager().getConfigManager().getMainConfig().blacklisted_permissions;
                                 boolean allowScanCreative = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_gamemode_creative;
                                 boolean allowScanBlackListedPerms = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_blacklisted_permissions;

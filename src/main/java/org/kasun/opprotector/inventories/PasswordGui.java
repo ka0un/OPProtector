@@ -5,15 +5,12 @@ import com.github.stefvanschie.inventoryframework.gui.type.AnvilGui;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-
 import org.bukkit.entity.Player;
-
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import org.bukkit.plugin.Plugin;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
+
 
 public class PasswordGui {
     private String title;
@@ -22,6 +19,7 @@ public class PasswordGui {
     private boolean isPasswordCorrect = false;
     private int attempts = 0;
     private VerificationProcessManager verificationProcessManager;
+    OPProtector plugin = OPProtector.getInstance();
 
     public PasswordGui(String title, String correctPassword, Player player) {
         this.title = title;
@@ -31,6 +29,8 @@ public class PasswordGui {
     }
 
     public void show(){
+
+
         AnvilGui gui = new AnvilGui(title);
         ItemStack itemStack1 = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemMeta itemMeta1 = itemStack1.getItemMeta();

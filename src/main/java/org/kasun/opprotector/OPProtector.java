@@ -1,12 +1,13 @@
 package org.kasun.opprotector;
 
+
 import org.bukkit.plugin.java.JavaPlugin;
-import org.kasun.opprotector.Configs.OperatorConfig;
 
 public final class OPProtector extends JavaPlugin {
     private static OPProtector instance;
     private boolean isFirstTime;
     MainManager mainManager;
+
 
     @Override
     public void onEnable() {

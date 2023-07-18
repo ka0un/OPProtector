@@ -1,11 +1,10 @@
 package org.kasun.opprotector.inventories;
 
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 
-public class MainLoginInventory {
+public class FactorsGuI {
 
-    public MainLoginInventory() {
+    public FactorsGuI() {
         ChestGui chestGui = new ChestGui(3, "Auth Login");
         chestGui.setOnGlobalClick(event -> event.setCancelled(true));
     }

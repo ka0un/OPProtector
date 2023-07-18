@@ -2,30 +2,27 @@ package org.kasun.opprotector.VerificationProcess;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
-import org.kasun.opprotector.Commands.Pas;
 import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Punishments.Lockdown;
 import org.kasun.opprotector.Utils.CommandExecutor;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VerificationProcessManager {
     static private OPProtector plugin = OPProtector.getInstance();
     private List<String> blacklistedPermissions;
     static PasswordFlash passwordFlash;
-    private ArrayList<Player> inVerification;
-    private ArrayList<Player> verifiedPlayers;
+    private HashMap<Player, VerificationStatus> verificationStatusMap;
     private boolean allowScanBlackListedPerms;
     private boolean allowScanCreative;
 
 
 
     public VerificationProcessManager(){
-        inVerification = new ArrayList<>();
-        verifiedPlayers = new ArrayList<>();
+        verificationStatusMap = new HashMap<>();
     }
 
     public void start(Player player){
@@ -65,17 +62,17 @@ public class VerificationProcessManager {
         //checking if player is already verified
         if (plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(player)){
             VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
-            verifiedPlayers.add(player);
+            verificationStatusMap.put(player, VerificationStatus.VERIFIED);
             return;
         }
 
         //checking if player is in verification process
-        if (inVerification.contains(player)){
+        if (verificationStatusMap.containsKey(player) && verificationStatusMap.get(player) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(player) == VerificationStatus.IN_FACTOR_VERIFICATION){
             return;
         }
 
         //start password verification process
-        inVerification.add(player);
+        verificationStatusMap.put(player, VerificationStatus.IN_PASSWORD_VERIFICATION);
         Lockdown lockdown = plugin.getMainManager().getPunishmentManager().getLockdown();
         lockdown.lockPlayer(player);
         PasswordVerification passwordVerification = new PasswordVerification(player);
@@ -90,22 +87,16 @@ public class VerificationProcessManager {
         lockdown.unlockPlayer(player);
         plugin.getMainManager().getAuthorizedPlayers().addAuthorizedPlayer(player);
         VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
-        inVerification.remove(player);
-        verifiedPlayers.add(player);
+        verificationStatusMap.put(player, VerificationStatus.VERIFIED);
     }
 
-    public ArrayList<Player> getInVerification() {
-        return inVerification;
-    }
-    public boolean isInVerification(Player player){
-        return inVerification.contains(player);
-    }
 
     public PasswordFlash getPasswordFlash() {
         return passwordFlash;
     }
-    public ArrayList<Player> getVerifiedPlayers() {
-        return verifiedPlayers;
+
+    public HashMap<Player, VerificationStatus> getVerificationStatusMap() {
+        return verificationStatusMap;
     }
 
 }

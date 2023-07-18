@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
-import org.kasun.opprotector.VerificationProcess.PasswordVerification;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 public class Pas implements CommandExecutor {

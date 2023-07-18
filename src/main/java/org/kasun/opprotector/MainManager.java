@@ -1,6 +1,6 @@
 package org.kasun.opprotector;
 
-import org.kasun.opprotector.AuthObjects.LiveScanner;
+import org.kasun.opprotector.Scanner.LiveScanner;
 import org.kasun.opprotector.AuthObjects.TempAuth;
 import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.Configs.ConfigManager;
