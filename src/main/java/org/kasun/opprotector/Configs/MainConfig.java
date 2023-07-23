@@ -60,19 +60,14 @@ public class MainConfig {
         configFile = new File(plugin.getDataFolder(), "config.yml");
         config = YamlConfiguration.loadConfiguration(configFile);
 
-        loadMainSettings();
         loadPasswordSettings();
         loadLockdownSettings();
         loadScannerSettings();
         loadCommandsSettings();
     }
 
-    public void loadMainSettings(){
-        ConfigurationSection main = config.getConfigurationSection("main-settings");
-        prefix = main.getString("prefix");
-    }
 
-    public void loadPasswordSettings(){
+    private void loadPasswordSettings(){
         ConfigurationSection password = config.getConfigurationSection("password-settings");
         pas_command = password.getString("pas-command");
         session_hours = password.getInt("session-hours");
@@ -80,7 +75,7 @@ public class MainConfig {
         use_gui = password.getBoolean("use-gui");
     }
 
-    public void loadLockdownSettings(){
+    private void loadLockdownSettings(){
         ConfigurationSection lockdown = config.getConfigurationSection("lockdown-settings");
         block_player_move = lockdown.getBoolean("block-player-move");
         block_break_block = lockdown.getBoolean("block-break-block");
@@ -93,7 +88,7 @@ public class MainConfig {
         commands_whitelist = new ArrayList<>(lockdown.getStringList("commands-whitelist"));
     }
 
-    public void loadScannerSettings(){
+    private void loadScannerSettings(){
         ConfigurationSection scanner = config.getConfigurationSection("scanner-settings");
         scan_on_player_op_command = scanner.getBoolean("scan-on-player-op-command");
         scan_on_console_op_command = scanner.getBoolean("scan-on-console-op-command");
@@ -105,7 +100,7 @@ public class MainConfig {
         live_scanner_interval_secounds = scanner.getInt("live-scanner-interval-secounds");
     }
 
-    public void loadCommandsSettings(){
+    private void loadCommandsSettings(){
         ConfigurationSection commands = config.getConfigurationSection("commands-settings");
         not_in_operators_list = new ArrayList<>(commands.getStringList("not-in-operators-list"));
         have_blacklisted_perms = new ArrayList<>(commands.getStringList("have-blacklisted-perms"));

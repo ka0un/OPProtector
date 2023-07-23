@@ -6,12 +6,12 @@ import java.util.HashMap;
 
 public class CustomConfig {
     OPProtector plugin = OPProtector.getInstance();
-    private HashMap<String, Object> Messages;
+    //private HashMap<String, Object> Messages;
     private HashMap<String, Object> IpList;
     private File fileIp;
-    private File fileMsg;
+    //private File fileMsg;
     private YamlConfiguration yamlConfigurationIp;
-    private YamlConfiguration yamlConfigurationMsg;
+    //private YamlConfiguration yamlConfigurationMsg;
 
 
     public CustomConfig() {
@@ -22,24 +22,24 @@ public class CustomConfig {
     }
 
     private void loadConfig() {
-        Messages = new HashMap<>();
+        //Messages = new HashMap<>();
         IpList = new HashMap<>();
         fileIp = new File(plugin.getDataFolder() + "/iplist.yml");
-        fileMsg = new File(plugin.getDataFolder() + "/messages.yml");
+        //fileMsg = new File(plugin.getDataFolder() + "/messages.yml");
         yamlConfigurationIp = YamlConfiguration.loadConfiguration(fileIp);
-        yamlConfigurationMsg = YamlConfiguration.loadConfiguration(fileMsg);
+        //yamlConfigurationMsg = YamlConfiguration.loadConfiguration(fileMsg);
         yamlConfigurationIp.getKeys(false).forEach(key -> {
             IpList.put(key, yamlConfigurationIp.get(key));
         });
-        yamlConfigurationMsg.getKeys(false).forEach(key -> {
-            Messages.put(key, yamlConfigurationMsg.get(key));
-        });
+        //yamlConfigurationMsg.getKeys(false).forEach(key -> {
+        //    Messages.put(key, yamlConfigurationMsg.get(key));
+        //});
     }
 
 
     private void createconfigfiles() {
         plugin.saveResource("iplist.yml", false);
-        plugin.saveResource("messages.yml", false);
+        //plugin.saveResource("messages.yml", false);
         plugin.saveResource("operators.yml", false);
     }
 
@@ -52,7 +52,7 @@ public class CustomConfig {
         } catch (Exception ignored) {}
     }
 
-    public void saveMessages() {
+    /*public void saveMessages() {
         Messages.forEach((key, value) -> {
             yamlConfigurationMsg.set(key, value);
         });
@@ -61,12 +61,17 @@ public class CustomConfig {
         } catch (Exception ignored) {}
     }
 
+     */
+
     public HashMap<String, Object> getIpList() {
         return IpList;
     }
 
+    /*
     public HashMap<String, Object> getMessages() {
         return Messages;
     }
+
+     */
 
 }
