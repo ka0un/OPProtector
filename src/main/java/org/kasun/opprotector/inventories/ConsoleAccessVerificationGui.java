@@ -12,6 +12,8 @@ import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class ConsoleAccessVerificationGui {
     String otp;
     Player player;
@@ -25,6 +27,7 @@ public class ConsoleAccessVerificationGui {
         verificationProcessManager = OPProtector.getInstance().getMainManager().getVerificationProcessManager();
     }
     public void show(){
+        AtomicBoolean lockClose = new AtomicBoolean(true);
 
         AnvilGui gui = new AnvilGui("Enter The OTP");
         ItemStack itemStack1 = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
@@ -45,6 +48,7 @@ public class ConsoleAccessVerificationGui {
         GuiItem item2 = new GuiItem(itemStack2, event -> {
             attempts++;
             if (gui.getRenameText().equals(otp) || gui.getRenameText().equals(" " + otp)){
+                lockClose.set(false);
                 player.closeInventory();
                 verificationProcessManager.setVerified(player);
             }else{
@@ -59,6 +63,7 @@ public class ConsoleAccessVerificationGui {
             attempts++;
             if (event.equals(otp) || event.equals(" " + otp)){
                 if (attempts < 10){
+                    lockClose.set(false);
                     player.closeInventory();
                     verificationProcessManager.setVerified(player);
                 }
@@ -67,7 +72,7 @@ public class ConsoleAccessVerificationGui {
         gui.setOnGlobalClick(event -> event.setCancelled(true));
         gui.setOnClose(event -> {
             OPProtector plugin = OPProtector.getInstance();
-            if (!plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(player)){
+            if (lockClose.get()){
                 gui.show(player);
             }
         });
