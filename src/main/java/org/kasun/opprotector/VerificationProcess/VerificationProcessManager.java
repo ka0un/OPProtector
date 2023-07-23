@@ -2,6 +2,7 @@ package org.kasun.opprotector.VerificationProcess;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.kasun.opprotector.AuthObjects.IpTable;
 import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
@@ -19,6 +20,7 @@ public class VerificationProcessManager {
     private HashMap<String, VerificationStatus> verificationStatusMap;
     private boolean allowScanBlackListedPerms;
     private boolean allowScanCreative;
+    private IpTable ipTable;
 
 
 
@@ -89,13 +91,24 @@ public class VerificationProcessManager {
         passwordFlash.stopTasks();
         verificationStatusMap.put(player.getName(), VerificationStatus.IN_FACTOR_VERIFICATION);
         plugin.getMainManager().getAuthorizedPlayers().addAuthorizedPlayer(player);
+
+        ipTable = plugin.getMainManager().getIpTable();
+        if (ipTable.IsContains(player) && ipTable.isIp(player)){
+            setVerified(player);
+            return;
+        }
+
         FactorsGuI factorsGuI = new FactorsGuI();
         factorsGuI.show(player);
     }
 
     public void setVerified(Player player){
+        ipTable = plugin.getMainManager().getIpTable();
+        ipTable.addIp(player);
+
         Lockdown lockdown = plugin.getMainManager().getPunishmentManager().getLockdown();
         lockdown.unlockPlayer(player);
+
         VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
         verificationStatusMap.put(player.getName(), VerificationStatus.VERIFIED);
     }

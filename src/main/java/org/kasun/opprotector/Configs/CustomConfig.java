@@ -24,8 +24,8 @@ public class CustomConfig {
     private void loadConfig() {
         Messages = new HashMap<>();
         IpList = new HashMap<>();
-        fileIp = new File(plugin.getDataFolder() + "iplist.yml");
-        fileMsg = new File(plugin.getDataFolder() + "messages.yml");
+        fileIp = new File(plugin.getDataFolder() + "/iplist.yml");
+        fileMsg = new File(plugin.getDataFolder() + "/messages.yml");
         yamlConfigurationIp = YamlConfiguration.loadConfiguration(fileIp);
         yamlConfigurationMsg = YamlConfiguration.loadConfiguration(fileMsg);
         yamlConfigurationIp.getKeys(false).forEach(key -> {
