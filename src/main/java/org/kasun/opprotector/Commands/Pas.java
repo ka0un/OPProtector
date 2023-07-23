@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
+import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 public class Pas implements CommandExecutor {
@@ -18,7 +19,7 @@ public class Pas implements CommandExecutor {
             if (args.length == 1) {
                 if (OperatorConfig.getOperatorNames().contains(player.getName())){
                     if (plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(player)) {
-                        player.sendMessage("You are already authorized.");
+                        player.sendMessage(Prefix.SUCCESS + "You are already authorized.");
                     }else {
                         String password = args[0];
                         String correctPassword = OperatorConfig.getOperatorConfig(player.getName()).getPassword();
@@ -27,12 +28,12 @@ public class Pas implements CommandExecutor {
                             verificationProcessManager.setTo2FA(player);
                             return true;
                         } else {
-                            player.sendMessage("Incorrect password.");
+                            player.sendMessage(Prefix.ERROR + "Incorrect password.");
                             return true;
                         }
                     }
                 }else{
-                    player.sendMessage("You dont have permission to use this command.");
+                    player.sendMessage(Prefix.INFO + "You dont have permission to use this command.");
                     return true;
                 }
             }

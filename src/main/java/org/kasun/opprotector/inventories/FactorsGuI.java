@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.kasun.opprotector.OPProtector;
+import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.VerificationProcess.ConsoleAccessVerification;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 import org.kasun.opprotector.VerificationProcess.VerificationStatus;
@@ -71,15 +72,11 @@ public class FactorsGuI {
         });
         GuiItem item2 = new GuiItem(itemStackE, event -> {
             event.setCancelled(true);
-            event.getWhoClicked().closeInventory();
-            verificationProcessManager.getVerificationStatusMap().put(player.getName(), VerificationStatus.DOING_FACTOR_VERIFICATION);
-            event.getWhoClicked().sendMessage(ChatColor.GREEN + "Please enter the password in the console.");
+            event.getWhoClicked().sendMessage(Prefix.ERROR + "This feature is not available yet.");
         });
         GuiItem item3 = new GuiItem(itemStackD, event -> {
             event.setCancelled(true);
-            verificationProcessManager.getVerificationStatusMap().put(player.getName(), VerificationStatus.DOING_FACTOR_VERIFICATION);
-            event.getWhoClicked().closeInventory();
-            event.getWhoClicked().sendMessage(ChatColor.GREEN + "Please enter the password in the console.");
+            event.getWhoClicked().sendMessage(Prefix.ERROR + "This feature is not available yet.");
         });
 
         hopperGui.setOnClose(event -> {

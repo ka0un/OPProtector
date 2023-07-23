@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.kasun.opprotector.OPProtector;
+import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 public class ConsoleAccessVerificationGui {
@@ -47,7 +48,7 @@ public class ConsoleAccessVerificationGui {
                 player.closeInventory();
                 verificationProcessManager.setVerified(player);
             }else{
-                player.sendMessage(ChatColor.RED + "You have entered the wrong otp.");
+                player.sendMessage(Prefix.ERROR + "You have entered the wrong OTP.");
             }
         });
         StaticPane pane2 = new StaticPane(0, 0, 1, 1);

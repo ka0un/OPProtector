@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Lockdown;
+import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 import java.util.List;
@@ -51,7 +52,7 @@ public class PlayerCommand implements Listener {
             }
             if (blockCommand){
                 e.setCancelled(true);
-                e.getPlayer().sendMessage("§cYou are not allowed to use this command");
+                e.getPlayer().sendMessage(Prefix.ERROR + "You are not allowed to use this command");
             }
         }
 

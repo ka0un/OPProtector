@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Utils.CommandExecutor;
+import org.kasun.opprotector.Utils.Prefix;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class PasswordFlash {
             @Override
             public void run() {
                 if (remainingTime > 0) {
-                    player.sendMessage(ChatColor.RED + "You have " + remainingTime + " seconds to enter the password.(/pas <password>)");
+                    player.sendMessage(Prefix.ERROR + "You have " + remainingTime + " seconds to enter the password.(/pas <password>)");
                     remainingTime--;
                 } else {
                     List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().failed_password_timeout;

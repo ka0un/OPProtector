@@ -5,6 +5,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.kasun.opprotector.OPProtector;
+import org.kasun.opprotector.Utils.Prefix;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class VerifiedAnnouncer {
         for (OfflinePlayer offlinePlayer : operatorSet) {
             if (offlinePlayer.isOnline()) {
                 Player onlinePlayer = offlinePlayer.getPlayer();
-                onlinePlayer.sendMessage(ChatColor.RED + " [" + player.getName() + "] " + ChatColor.BLUE+ "[" + player.getAddress().getHostName() + "]" + ChatColor.GRAY + " is Authorized by " + ChatColor.GREEN + " [OPProtector]" + ChatColor.GRAY + " and now have Operator Access ✔");
+                onlinePlayer.sendMessage(Prefix.ERROR + "[" + player.getName() + "] " + ChatColor.BLUE+ "[" + player.getAddress().getHostName() + "]" + ChatColor.GRAY + " is Authorized, and now have Operator Access ✔");
             }
         }
     }
