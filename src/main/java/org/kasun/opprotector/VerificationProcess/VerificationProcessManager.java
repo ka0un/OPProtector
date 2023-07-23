@@ -67,14 +67,13 @@ public class VerificationProcessManager {
                 return;
             }
         }
-        System.out.println("doing");
+
 
         //checking if player is in verification process
         if (verificationStatusMap.containsKey(player.getName()) && verificationStatusMap.get(player.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(player.getName()) == VerificationStatus.IN_FACTOR_VERIFICATION || verificationStatusMap.get(player.getName()) == VerificationStatus.DOING_FACTOR_VERIFICATION){
             return;
         }
 
-        System.out.println("bad");
 
         //start password verification process
         verificationStatusMap.put(player.getName(), VerificationStatus.IN_PASSWORD_VERIFICATION);

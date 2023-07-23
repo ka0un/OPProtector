@@ -65,6 +65,16 @@ scanner-settings:
     - "worldguard.*"
     - "luckperms.*"
     - "lp.*"
+    - "luckperms.*"
+    - "luckperms.trusteditor"
+    - "luckperms.editor"
+    - "luckperms.user.permission.set"
+    - "lands.admin.*"
+    - "lands.bypass.*"
+    - "excellentcrates.*"
+    - "citizens.admin"
+    - "minecraft.admin"
+    - "plhide.bypass"
 
 #===============================================================================
 # Commands Settings

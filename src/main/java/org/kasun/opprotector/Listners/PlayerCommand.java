@@ -7,6 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Lockdown;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
@@ -37,6 +38,21 @@ public class PlayerCommand implements Listener {
                 e.setCancelled(true);
             }
 
+        }
+
+        if  (plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(e.getPlayer())) {
+            boolean blockCommand = false;
+            List<String> commandsBlacklist = OperatorConfig.getOperatorConfig(e.getPlayer().getName()).getCommandBlacklist();
+            for (String command : commandsBlacklist){
+                if (e.getMessage().startsWith("/" + command)){
+                    blockCommand = true;
+                    break;
+                }
+            }
+            if (blockCommand){
+                e.setCancelled(true);
+                e.getPlayer().sendMessage("§cYou are not allowed to use this command");
+            }
         }
 
         if (e.getMessage().startsWith("/op")){
