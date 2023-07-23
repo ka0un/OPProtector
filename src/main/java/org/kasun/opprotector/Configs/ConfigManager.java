@@ -4,10 +4,11 @@ public class ConfigManager {
 
     MainConfig mainConfig;
     CustomConfig customConfig;
+    OperatorConfig operatorConfig;
     public ConfigManager() {
         mainConfig = new MainConfig();
         customConfig = new CustomConfig();
-        OperatorConfig.loadOperators();
+        operatorConfig = new OperatorConfig();
     }
 
     public MainConfig getMainConfig() {
@@ -16,5 +17,9 @@ public class ConfigManager {
 
     public CustomConfig getCustomConfig() {
         return customConfig;
+    }
+
+    public OperatorConfig getOperatorConfig() {
+        return operatorConfig;
     }
 }

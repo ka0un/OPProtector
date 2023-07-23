@@ -1,17 +1,16 @@
-name: KASUNhapangama2
-password: password123
-email: john@example.com
-discord: John#1234
-commandBlacklist:
-  - blacklistedCommand1
-  - blacklistedCommand2
+KASUNhapangama2:
+  password: password123
+  email: john@gc.com
+  discord: John#1234
+  commandBlacklist:
+      - blacklistedCommand1
+      - blacklistedCommand2
 
----
-
-name: OpPlayer2
-password: password456
-email: jane@example.com
-discord: Jane#5678
-commandBlacklist:
-  - blacklistedCommand3
-  - blacklistedCommand4
+Yourname:
+  name: yourname
+  password: password123
+  email: john@gc.com
+  discord: John#1234
+  commandBlacklist:
+    - blacklistedCommand1
+    - blacklistedCommand2

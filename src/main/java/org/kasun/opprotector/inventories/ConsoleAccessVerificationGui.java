@@ -26,7 +26,7 @@ public class ConsoleAccessVerificationGui {
     }
     public void show(){
 
-        AnvilGui gui = new AnvilGui("Enter OTP That Sent To Console");
+        AnvilGui gui = new AnvilGui("Enter The OTP");
         ItemStack itemStack1 = new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
         ItemMeta itemMeta1 = itemStack1.getItemMeta();
         itemMeta1.setDisplayName(" ");

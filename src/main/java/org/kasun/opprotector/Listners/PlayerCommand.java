@@ -43,7 +43,7 @@ public class PlayerCommand implements Listener {
 
         if  (plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(e.getPlayer())) {
             boolean blockCommand = false;
-            List<String> commandsBlacklist = OperatorConfig.getOperatorConfig(e.getPlayer().getName()).getCommandBlacklist();
+            List<String> commandsBlacklist = plugin.getMainManager().getConfigManager().getOperatorConfig().getOperator(e.getPlayer().getName()).getCommandBlacklist();
             for (String command : commandsBlacklist){
                 if (e.getMessage().startsWith("/" + command)){
                     blockCommand = true;

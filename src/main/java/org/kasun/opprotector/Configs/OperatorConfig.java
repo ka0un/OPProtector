@@ -1,137 +1,116 @@
 package org.kasun.opprotector.Configs;
 
+import com.sun.tools.javac.Main;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.kasun.opprotector.OPProtector;
+import org.kasun.opprotector.Utils.Encryption;
 import org.yaml.snakeyaml.Yaml;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.*;
 
 public class OperatorConfig {
 
-    private static OPProtector plugin = OPProtector.getInstance();
+    private OPProtector plugin = OPProtector.getInstance();
 
-    private static final String FILE_PATH = plugin.getDataFolder() + "/operators.yml";
+    private final String FILE_PATH = plugin.getDataFolder() + "/operators.yml";
 
-    private static Map<String, OperatorConfig> operatorMap = new LinkedHashMap<>();
-    private static List<String> operatorNames = new ArrayList<>();
+    private Map<String, Operator> operatorDataMap;
+    String EncryptedPrefix = "Encrypted_";
+    String key = "1234567890123456";
 
-    private String name;
-    private String password;
-    private String email;
-    private String discord;
-    private List<String> commandBlacklist;
+
 
     public OperatorConfig() {
+        operatorDataMap = new HashMap<>();
+        loadOperators();
     }
 
-    public OperatorConfig(String name, String password, String email, String discord, List<String> commandBlacklist) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.discord = discord;
-        this.commandBlacklist = commandBlacklist;
-    }
-
-    public static void loadOperators() {
-        try (FileInputStream input = new FileInputStream(FILE_PATH)) {
+    public void loadOperators() {
+        try (InputStream inputStream = new FileInputStream(FILE_PATH)) {
             Yaml yaml = new Yaml();
-            Iterable<Object> data = yaml.loadAll(input);
+            Map<String, Map<String, Object>> data = yaml.load(inputStream);
 
-            operatorMap.clear();
-            operatorNames.clear();
+            for (Map.Entry<String, Map<String, Object>> entry : data.entrySet()) {
+                String operatorName = entry.getKey();
+                Map<String, Object> operatorData = entry.getValue();
 
-            for (Object object : data) {
-                if (object instanceof Map) {
-                    Map<String, Object> operatorData = (Map<String, Object>) object;
-                    OperatorConfig operator = new OperatorConfig();
+                Operator operator = new Operator();
+                operator.setName(operatorName);
+                if (operatorData.get("password").toString().startsWith(EncryptedPrefix)) {
+                    String encryptedPassword = operatorData.get("password").toString().substring(EncryptedPrefix.length());
+                    try{
+                        operator.setPassword(Encryption.decrypt(encryptedPassword, key));
+                    }catch (Exception ignored){}
+                } else {
+                    operator.setPassword(operatorData.get("password").toString());
 
-                    operator.setName((String) operatorData.get("name"));
-                    operator.setPassword((String) operatorData.get("password"));
-                    operator.setEmail((String) operatorData.get("email"));
-                    operator.setDiscord((String) operatorData.get("discord"));
-                    operator.setCommandBlacklist((List<String>) operatorData.get("commandBlacklist"));
-
-                    operatorMap.put(operator.getName(), operator);
-                    operatorNames.add(operator.getName());
                 }
+                operator.setEmail(operatorData.get("email").toString());
+                operator.setDiscord(operatorData.get("discord").toString());
+                operator.setCommandBlacklist((List<String>) operatorData.get("commandBlacklist"));
+
+                operatorDataMap.put(operatorName, operator);
             }
+            saveOperators();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void saveOperators() {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+
+    public void saveOperators() {
+        try (OutputStream outputStream = new FileOutputStream(FILE_PATH)) {
             Yaml yaml = new Yaml();
+            Map<String, Map<String, Object>> data = new HashMap<>();
+            MainConfig mainConfig = new MainConfig();
 
-            for (String operatorName : operatorNames) {
-                OperatorConfig operator = operatorMap.get(operatorName);
+            for (Map.Entry<String, Operator> entry : operatorDataMap.entrySet()) {
+                String operatorName = entry.getKey();
+                Operator operator = entry.getValue();
 
-                Map<String, Object> operatorData = new LinkedHashMap<>();
-                operatorData.put("name", operator.getName());
-                operatorData.put("password", operator.getPassword());
+                Map<String, Object> operatorData = new HashMap<>();
+                if (mainConfig.encrypt_passwords){
+                    try{
+                        operatorData.put("password", EncryptedPrefix + Encryption.encrypt(operator.getPassword(), key));
+                    }catch (Exception ignored){}
+                }else {
+                    operatorData.put("password", operator.getPassword());
+                }
                 operatorData.put("email", operator.getEmail());
                 operatorData.put("discord", operator.getDiscord());
                 operatorData.put("commandBlacklist", operator.getCommandBlacklist());
 
-                yaml.dump(operatorData, writer);
-                writer.write("---\n");
+                data.put(operatorName, operatorData);
             }
+
+            yaml.dump(data, new OutputStreamWriter(outputStream));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static List<String> getOperatorNames() {
-        return operatorNames;
+
+    public Operator getOperator(String operatorName) {
+        return operatorDataMap.get(operatorName);
     }
 
-    public static OperatorConfig getOperatorConfig(String operatorName) {
-        return operatorMap.get(operatorName);
+    public Map<String, Operator> getOperatorDataMap() {
+        return operatorDataMap;
     }
 
-    public String getName() {
-        return name;
+    public boolean isContains(String operatorName) {
+        if (operatorDataMap.containsKey(operatorName)) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDiscord() {
-        return discord;
-    }
-
-    public void setDiscord(String discord) {
-        this.discord = discord;
-    }
-
-    public List<String> getCommandBlacklist() {
-        return commandBlacklist;
-    }
-
-    public void setCommandBlacklist(List<String> commandBlacklist) {
-        this.commandBlacklist = commandBlacklist;
-    }
 }
 

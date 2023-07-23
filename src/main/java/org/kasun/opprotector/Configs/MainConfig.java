@@ -39,6 +39,7 @@ public class MainConfig {
     scan_from_live_scanner,
     scan_for_blacklisted_permissions,
     scan_for_gamemode_creative,
+    encrypt_passwords,
     scan_on_join;
 
 
@@ -73,6 +74,7 @@ public class MainConfig {
         session_hours = password.getInt("session-hours");
         interval_secounds = password.getInt("interval-secounds");
         use_gui = password.getBoolean("use-gui");
+        encrypt_passwords = password.getBoolean("encrypt-passwords");
     }
 
     private void loadLockdownSettings(){

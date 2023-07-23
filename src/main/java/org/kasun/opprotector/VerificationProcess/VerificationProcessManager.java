@@ -32,15 +32,14 @@ public class VerificationProcessManager {
         blacklistedPermissions = plugin.getMainManager().getConfigManager().getMainConfig().blacklisted_permissions;
         allowScanCreative = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_gamemode_creative;
         allowScanBlackListedPerms = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_blacklisted_permissions;
-
-        List<String> opnames = OperatorConfig.getOperatorNames();
+        boolean opContainsInYml = plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(player.getName());
 
         //checking for blacklisted permissions
         if (allowScanBlackListedPerms){
             for (String permission : blacklistedPermissions){
                 try{
                     if (player.hasPermission(permission)){
-                        if (!opnames.contains(player.getName())){
+                        if (!opContainsInYml){
                             List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
                             CommandExecutor commandExecutor = new CommandExecutor(player, commands);
                             Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
@@ -50,13 +49,14 @@ public class VerificationProcessManager {
             }
         }
 
+
         //checking for op
         if (!player.isOp() && !(player.getGameMode() == GameMode.CREATIVE && allowScanCreative)){
             return;
         }
 
         //checking if player is listed in operators.yml
-        if (!opnames.contains(player.getName())){
+        if (!opContainsInYml){
             List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
             CommandExecutor commandExecutor = new CommandExecutor(player, commands);
             Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");

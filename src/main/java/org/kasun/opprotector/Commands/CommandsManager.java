@@ -1,5 +1,6 @@
 package org.kasun.opprotector.Commands;
 
+import org.kasun.opprotector.Configs.MainConfig;
 import org.kasun.opprotector.OPProtector;
 
 public class CommandsManager {

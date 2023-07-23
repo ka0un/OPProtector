@@ -20,7 +20,7 @@ public class PasswordVerification {
     public PasswordVerification(Player player) {
         isgui = plugin.getMainManager().getConfigManager().getMainConfig().use_gui;
         if (isgui) {
-            String password = OperatorConfig.getOperatorConfig(player.getName()).getPassword();
+            String password = plugin.getMainManager().getConfigManager().getOperatorConfig().getOperator(player.getName()).getPassword();
             PasswordGui passwordGui = new PasswordGui("Enter The Password", password, player);
             passwordGui.show();
         }

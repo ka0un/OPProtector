@@ -16,6 +16,7 @@ password-settings:
   use-gui: true
   interval-secounds: 60
   pas-command: "pas"
+  encrypt-passwords: true
 
 #===============================================================================
 # Lockdown Settings

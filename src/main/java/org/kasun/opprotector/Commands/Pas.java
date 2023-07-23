@@ -17,12 +17,13 @@ public class Pas implements CommandExecutor {
         if (sender instanceof Player){
             Player player = (Player) sender;
             if (args.length == 1) {
-                if (OperatorConfig.getOperatorNames().contains(player.getName())){
+                if (plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(player.getName())) {
                     if (plugin.getMainManager().getAuthorizedPlayers().isAuthorizedPlayer(player)) {
                         player.sendMessage(Prefix.SUCCESS + "You are already authorized.");
+                        return true;
                     }else {
                         String password = args[0];
-                        String correctPassword = OperatorConfig.getOperatorConfig(player.getName()).getPassword();
+                        String correctPassword = plugin.getMainManager().getConfigManager().getOperatorConfig().getOperator(player.getName()).getPassword();
                         if (password.equals(correctPassword)) {
                             VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
                             verificationProcessManager.setTo2FA(player);
@@ -38,6 +39,6 @@ public class Pas implements CommandExecutor {
                 }
             }
         }
-        return false;
+        return true;
     }
 }

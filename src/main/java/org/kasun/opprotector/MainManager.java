@@ -1,6 +1,7 @@
 package org.kasun.opprotector;
 
 import org.kasun.opprotector.AuthObjects.IpTable;
+import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.Scanner.LiveScanner;
 import org.kasun.opprotector.AuthObjects.TempAuth;
 import org.kasun.opprotector.Commands.CommandsManager;
