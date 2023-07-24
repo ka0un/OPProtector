@@ -12,73 +12,70 @@ import org.kasun.opprotector.Utils.CommandExecutor;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 import org.kasun.opprotector.VerificationProcess.VerificationStatus;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class LiveScanner {
     private BukkitTask liveScannerTask;
-    public LiveScanner() {
 
+    public LiveScanner() {
     }
+
     public void start() {
         OPProtector plugin = OPProtector.getInstance();
-        int secounds = plugin.getMainManager().getConfigManager().getMainConfig().live_scanner_interval_secounds;
-        Long period = (long) (secounds * 20);
-        liveScannerTask =  new BukkitRunnable() {
+        int seconds = plugin.getMainManager().getConfigManager().getMainConfig().live_scanner_interval_secounds;
+        Long period = (long) (seconds * 20);
+        liveScannerTask = new BukkitRunnable() {
             @Override
             public void run() {
                 HashMap<String, VerificationStatus> verificationStatusMap = plugin.getMainManager().getVerificationProcessManager().getVerificationStatusMap();
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                        Bukkit.getOnlinePlayers().forEach(p -> {
-                            if (!(verificationStatusMap.containsKey(p.getName()) && verificationStatusMap.get(p.getName()) == VerificationStatus.VERIFIED) || verificationStatusMap.get(p.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(p.getName()) == VerificationStatus.IN_FACTOR_VERIFICATION || verificationStatusMap.get(p.getName()) == VerificationStatus.DOING_FACTOR_VERIFICATION ) {
-                                List<String> blacklistedPermissions = plugin.getMainManager().getConfigManager().getMainConfig().blacklisted_permissions;
-                                boolean allowScanCreative = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_gamemode_creative;
-                                boolean allowScanBlackListedPerms = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_blacklisted_permissions;
-                                boolean opContainsInYml = plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(p.getName());
+                    VerificationStatus verificationStatus = verificationStatusMap.getOrDefault(player.getName(), VerificationStatus.NOT_VERIFIED);
 
-                                //no blacklisted permissions
-                                if (allowScanBlackListedPerms){
-                                    for (String permission : blacklistedPermissions){
-                                        try{
-                                            if (player.hasPermission(permission)){
-                                                if (!opContainsInYml){
-                                                    List<String> haveBlacklistedPermsCommands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
-                                                    CommandExecutor commandExecutor = new CommandExecutor(p, haveBlacklistedPermsCommands);
-                                                    Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
-                                                }
-                                            }
-                                        }catch (NullPointerException ignored){}
+                    if (verificationStatus != VerificationStatus.VERIFIED && verificationStatus != VerificationStatus.IN_PASSWORD_VERIFICATION
+                            && verificationStatus != VerificationStatus.IN_FACTOR_VERIFICATION && verificationStatus != VerificationStatus.DOING_FACTOR_VERIFICATION) {
+
+                        List<String> blacklistedPermissions = plugin.getMainManager().getConfigManager().getMainConfig().blacklisted_permissions;
+                        boolean allowScanCreative = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_gamemode_creative;
+                        boolean allowScanBlacklistedPerms = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_blacklisted_permissions;
+                        boolean opContainsInYml = plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(player.getName());
+
+                        // Check for blacklisted permissions
+                        if (allowScanBlacklistedPerms) {
+                            for (String permission : blacklistedPermissions) {
+                                try {
+                                    if (player.hasPermission(permission)) {
+                                        if (!opContainsInYml) {
+                                            List<String> haveBlacklistedPermsCommands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
+                                            CommandExecutor commandExecutor = new CommandExecutor(player, haveBlacklistedPermsCommands);
+                                            Ban ban = new Ban(player, "You aren't listed in OPProtector/operators.yml", "Unauthorized Access");
+                                        }
                                     }
+                                } catch (NullPointerException ignored) {
                                 }
-
-                                //is op
-                                if (!player.isOp() && !(player.getGameMode() == GameMode.CREATIVE && allowScanCreative)){
-                                    return;
-                                }
-
-                                //is listed in operators.yml
-                                if (!opContainsInYml){
-                                    List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
-                                    CommandExecutor commandExecutor = new CommandExecutor(p, commands);
-                                    Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
-                                }
-
-                                Bukkit.getScheduler().runTask(plugin, () -> {
-                                    verify(player);
-                                });
-
-
                             }
-                        });
-                    });
+                        }
+
+                        // Check if player is an OP
+                        if (!player.isOp() && !(player.getGameMode() == GameMode.CREATIVE && allowScanCreative)) {
+                            continue;
+                        }
+
+                        // Check if player is listed in operators.yml
+                        if (!opContainsInYml) {
+                            List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
+                            CommandExecutor commandExecutor = new CommandExecutor(player, commands);
+                            Ban ban = new Ban(player, "You aren't listed in OPProtector/operators.yml", "Unauthorized Access");
+                        }
+
+                        verify(player);
+                    }
                 }
             }
-        }.runTaskTimerAsynchronously(plugin, 5L, period); // Run every second (20 ticks)
+        }.runTaskTimer(plugin, 5L, period); // Run every second (20 ticks)
     }
 
-    private void verify(Player player){
+    private void verify(Player player) {
         OPProtector plugin = OPProtector.getInstance();
         VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
         verificationProcessManager.start(player);
@@ -90,6 +87,6 @@ public class LiveScanner {
             liveScannerTask = null;
         }
     }
-
 }
+
 

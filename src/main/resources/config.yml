@@ -12,11 +12,22 @@
 #===============================================================================
 
 password-settings:
+  required-every-login: true
   session-hours: 1
   use-gui: true
   interval-secounds: 60
   pas-command: "pas"
   encrypt-passwords: true
+
+#===============================================================================
+# Factor Authentication Settings
+#===============================================================================
+factor-auth:
+  2fa-enabled: true
+  required-every-login: true
+  console-access-verfication: true
+  discord-verfication: true #not done yet
+  email-verfication: true #not done yet
 
 #===============================================================================
 # Lockdown Settings
@@ -86,4 +97,16 @@ commands-settings:
   admin-ip-changed:
 
   failed-password-timeout:
+
+#===============================================================================
+# Remote Notifier Settings
+#===============================================================================
+remote-notifications:
+  discord-webhook:
+  authentication-passed-notification: true
+  authentication-failed-notification: true
+  unauthenticated-access-notification: true
+
+
+
 
