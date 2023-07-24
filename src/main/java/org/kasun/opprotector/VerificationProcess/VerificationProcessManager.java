@@ -43,6 +43,7 @@ public class VerificationProcessManager {
                             List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
                             CommandExecutor commandExecutor = new CommandExecutor(player, commands);
                             Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
+                            plugin.getMainManager().getLog().banned(player, "Having Blacklisted Permission : " + permission);
                         }
                     }
                 }catch (NullPointerException ignored){}
@@ -60,6 +61,7 @@ public class VerificationProcessManager {
             List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
             CommandExecutor commandExecutor = new CommandExecutor(player, commands);
             Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
+            plugin.getMainManager().getLog().banned(player, "Not Listed in operators.yml");
         }
 
         //checking if player is already verified
@@ -98,6 +100,10 @@ public class VerificationProcessManager {
             return;
         }
 
+        if (ipTable.IsContains(player)){
+            plugin.getMainManager().getLog().loginfromDifferntIP(player, ipTable.getIp(player), player.getAddress().getAddress().getHostAddress());
+        }
+
         FactorsGuI factorsGuI = new FactorsGuI();
         factorsGuI.show(player);
     }
@@ -110,6 +116,7 @@ public class VerificationProcessManager {
         lockdown.unlockPlayer(player);
 
         VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
+        plugin.getMainManager().getLog().authorized(player);
         verificationStatusMap.put(player.getName(), VerificationStatus.VERIFIED);
     }
 

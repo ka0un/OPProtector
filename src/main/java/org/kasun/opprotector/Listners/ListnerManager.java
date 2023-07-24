@@ -14,6 +14,7 @@ public class ListnerManager {
         plugin.getServer().getPluginManager().registerEvents(new PlayerBlockPlace(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerItemDrop(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerLeave(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerMessage(), plugin);
 
     }
 }

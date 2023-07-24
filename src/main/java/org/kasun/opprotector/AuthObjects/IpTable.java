@@ -47,6 +47,12 @@ public class IpTable {
         saveIp();
     }
 
+    public String getIp(Player player) {
+        String playerName = player.getName();
+        return ipTable.get(playerName).toString();
+
+    }
+
     private void saveIp() {
         customConfig.saveIpList();
     }

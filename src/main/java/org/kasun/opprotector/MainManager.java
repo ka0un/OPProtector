@@ -8,6 +8,7 @@ import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.Configs.ConfigManager;
 import org.kasun.opprotector.Listners.ListnerManager;
 import org.kasun.opprotector.Punishments.PunishmentManager;
+import org.kasun.opprotector.Utils.Log;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 public class MainManager {
@@ -19,6 +20,7 @@ public class MainManager {
     private VerificationProcessManager verificationProcessManager;
     private LiveScanner liveScanner;
     private IpTable ipTable;
+    private Log log;
     OPProtector plugin = OPProtector.getInstance();
     public MainManager() {
         configManager = new ConfigManager();
@@ -29,6 +31,7 @@ public class MainManager {
         verificationProcessManager = new VerificationProcessManager();
         liveScanner = new LiveScanner();
         ipTable = new IpTable();
+        log = new Log();
 
     }
 
@@ -62,6 +65,10 @@ public class MainManager {
 
     public IpTable getIpTable() {
         return ipTable;
+    }
+
+    public Log getLog() {
+        return log;
     }
 
 }

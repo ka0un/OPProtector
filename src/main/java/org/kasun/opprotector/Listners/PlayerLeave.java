@@ -26,5 +26,8 @@ public class PlayerLeave implements Listener {
             passwordFlash.stopTasks();
             verificationStatusMap.remove(e.getPlayer().getName());
         }
+        if (e.getPlayer().isOp()) {
+            plugin.getMainManager().getLog().logout(e.getPlayer());
+        }
     }
 }

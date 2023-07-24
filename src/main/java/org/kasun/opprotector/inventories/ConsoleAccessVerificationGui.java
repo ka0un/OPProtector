@@ -18,6 +18,7 @@ public class ConsoleAccessVerificationGui {
     String otp;
     Player player;
     int attempts;
+    OPProtector plugin = OPProtector.getInstance();
 
     VerificationProcessManager verificationProcessManager;
 
@@ -53,6 +54,7 @@ public class ConsoleAccessVerificationGui {
                 verificationProcessManager.setVerified(player);
             }else{
                 player.sendMessage(Prefix.ERROR + "You have entered the wrong OTP.");
+                plugin.getMainManager().getLog().failedFactor(player);
             }
         });
         StaticPane pane2 = new StaticPane(0, 0, 1, 1);

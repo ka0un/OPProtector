@@ -56,9 +56,25 @@ public class PlayerCommand implements Listener {
             }
         }
 
+        if (e.getPlayer().isOp()){
+            boolean blockCommand = false;
+            List<String> commandsBlacklist = plugin.getMainManager().getConfigManager().getOperatorConfig().getOperator(e.getPlayer().getName()).getCommandBlacklist();
+            for (String command : commandsBlacklist){
+                if (e.getMessage().startsWith("/" + command)){
+                    blockCommand = true;
+                    break;
+                }
+            }
+
+            if (!blockCommand){
+                plugin.getMainManager().getLog().command(e.getPlayer(), e.getMessage());
+            }
+        }
+
         if (e.getMessage().startsWith("/op")){
             OPProtector plugin = OPProtector.getInstance();
             boolean allow = plugin.getMainManager().getConfigManager().getMainConfig().scan_on_player_op_command;
+
             if (!allow) {return;}
             String str = e.getMessage();
             int index = str.indexOf("/op ");
