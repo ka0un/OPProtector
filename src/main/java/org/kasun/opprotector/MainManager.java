@@ -9,6 +9,7 @@ import org.kasun.opprotector.Configs.ConfigManager;
 import org.kasun.opprotector.Listners.ListnerManager;
 import org.kasun.opprotector.Punishments.PunishmentManager;
 import org.kasun.opprotector.Utils.Log;
+import org.kasun.opprotector.Utils.UpdateChecker;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 
 public class MainManager {
@@ -21,6 +22,7 @@ public class MainManager {
     private LiveScanner liveScanner;
     private IpTable ipTable;
     private Log log;
+    private UpdateChecker updateChecker;
     OPProtector plugin = OPProtector.getInstance();
     public MainManager() {
         configManager = new ConfigManager();
@@ -32,7 +34,7 @@ public class MainManager {
         liveScanner = new LiveScanner();
         ipTable = new IpTable();
         log = new Log();
-
+        updateChecker = new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion());
     }
 
     public ConfigManager getConfigManager() {
