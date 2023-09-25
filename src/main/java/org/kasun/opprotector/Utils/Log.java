@@ -6,16 +6,22 @@ import org.kasun.opprotector.OPProtector;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Log {
     private File logFile;
+
+    private HashMap<Timestamp, String> cache;
+
 
 
 
     OPProtector plugin = OPProtector.getInstance();
     public Log() {
+        cache = new HashMap<>();
         // Get the current date and time
         Date currentDate = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
@@ -95,11 +101,49 @@ public class Log {
     }
 
     public void command(Player player, String command) {
+
+        if (cached("[" + player.getName() + "] >> " + command)){
+            return;
+        }
+
+        for (String commandBlacklist : plugin.getMainManager().getConfigManager().getMainConfig().commands_whitelist){
+            if (command.startsWith(commandBlacklist)){
+                return;
+            }
+        }
+
         log("[" + player.getName() + "] >> " + command, true, false);
     }
 
     public void message(Player player, String message) {
+        if (cached("[" + player.getName() + "] >> " + message)){
+            return;
+        }
         log("[" + player.getName() + "] >> " + message, true, false);
+    }
+
+    private boolean cached(String message){
+
+        //if theres something older than 3 secounds in the cache remove them
+        if (cache.keySet() != null){
+            for (Timestamp timestamp : cache.keySet()){
+                if (timestamp.getTime() < System.currentTimeMillis() - 3000){
+                    cache.remove(timestamp);
+                }
+            }
+        }
+
+
+        for (String cachedMessage : cache.values()){
+            if (cachedMessage.equals(message)){
+                return true;
+            }
+        }
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        cache.put(timestamp, message);
+
+        return false;
     }
 
 }

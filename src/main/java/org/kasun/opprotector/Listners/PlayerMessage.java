@@ -36,17 +36,7 @@ public class PlayerMessage implements org.bukkit.event.Listener{
         }
 
         if (e.getPlayer().isOp()){
-            boolean blockCommand = false;
-            List<String> commandsBlacklist = plugin.getMainManager().getConfigManager().getMainConfig().commands_whitelist;
-            for (String command : commandsBlacklist){
-                if (e.getMessage().startsWith("/" + command)){
-                    blockCommand = true;
-                    break;
-                }
-                if (!blockCommand){
-                    plugin.getMainManager().getLog().message(e.getPlayer(), e.getMessage());
-                }
-            }
+            plugin.getMainManager().getLog().command(e.getPlayer(), e.getMessage());
         }
     }
 }
