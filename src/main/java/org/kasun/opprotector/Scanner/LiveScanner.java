@@ -46,10 +46,18 @@ public class LiveScanner {
                                 try {
                                     if (player.hasPermission(permission)) {
                                         if (!opContainsInYml) {
-                                            List<String> haveBlacklistedPermsCommands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
-                                            CommandExecutor commandExecutor = new CommandExecutor(player, haveBlacklistedPermsCommands);
-                                            Ban ban = new Ban(player, "You aren't listed in OPProtector/operators.yml", "Unauthorized Access");
-                                            plugin.getMainManager().getLog().banned(player, "Having Blacklisted Permission : " + permission);
+                                            if (!player.isOp()){
+                                                List<String> haveBlacklistedPermsCommands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
+                                                CommandExecutor commandExecutor = new CommandExecutor(player, haveBlacklistedPermsCommands);
+                                                Ban ban = new Ban(player, "You aren't listed in OPProtector/operators.yml", "Unauthorized Access");
+                                                plugin.getMainManager().getLog().banned(player, "Having Blacklisted Permission : " + permission);
+                                            }else{
+                                                List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
+                                                CommandExecutor commandExecutor = new CommandExecutor(player, commands);
+                                                Ban ban = new Ban(player, "You aren't listed in OPProtector/operators.yml", "Unauthorized Access");
+                                                plugin.getMainManager().getLog().banned(player, "Not listed in operators.yml");
+                                            }
+
                                         }
                                     }
                                 } catch (NullPointerException ignored) {

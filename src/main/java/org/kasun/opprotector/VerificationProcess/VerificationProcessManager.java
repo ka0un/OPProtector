@@ -40,10 +40,17 @@ public class VerificationProcessManager {
                 try{
                     if (player.hasPermission(permission)){
                         if (!opContainsInYml){
-                            List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
-                            CommandExecutor commandExecutor = new CommandExecutor(player, commands);
-                            Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
-                            plugin.getMainManager().getLog().banned(player, "Having Blacklisted Permission : " + permission);
+                            if(!player.isOp()) {
+                                List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
+                                CommandExecutor commandExecutor = new CommandExecutor(player, commands);
+                                Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
+                                plugin.getMainManager().getLog().banned(player, "Having Blacklisted Permission : " + permission);
+                            }else{
+                                List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
+                                CommandExecutor commandExecutor = new CommandExecutor(player, commands);
+                                Ban ban = new Ban(player, "You arent listed in OPProtector/operators.yml", "Unautharized Access");
+                                plugin.getMainManager().getLog().banned(player, "Not Listed in operators.yml");
+                            }
                         }
                     }
                 }catch (NullPointerException ignored){}
