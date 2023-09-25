@@ -1,6 +1,8 @@
 package org.kasun.opprotector.Utils;
 
 import org.bukkit.entity.Player;
+import org.kasun.opprotector.Discord.Notification;
+import org.kasun.opprotector.Discord.NotificationType;
 import org.kasun.opprotector.OPProtector;
 
 import java.io.File;
@@ -74,18 +76,22 @@ public class Log {
 
     public void authorized(Player player) {
         log("Operator [" + player.getName() + "] [" + player.getAddress().getHostName() + "] has been authorized.", true, false);
+        Notification notification = new Notification(player.getName(), NotificationType.AUTH_SUCCESS, "");
     }
 
     public void banned(Player player, String reason) {
         log("[" + player.getName() + "] [" + player.getAddress().getHostName() + "] has been banned. Reason: " + reason, true, true);
+        Notification notification = new Notification(player.getName(), NotificationType.UNAUTH_ACCESS, "```Player : " + player.getName() + "\\u000A" + "IP : " + player.getAddress().getHostName() + "\\u000A" + "Reason : " + reason + "\\u000A" + "Status : Banned ```");
     }
 
     public void failedPassword(Player player) {
         log("Operator [" + player.getName() + "] [" + player.getAddress().getHostName() + "] has failed to enter the password.", true, false);
+        Notification notification = new Notification(player.getName(), NotificationType.AUTH_FAIL, "```Player : " + player.getName() + "\\u000A" + "Reason : Failed to enter the password ```");
     }
 
     public void failedFactor(Player player) {
         log("Operator [" + player.getName() + "] [" + player.getAddress().getHostName() + "] has failed to enter the factor.", true, false);
+        Notification notification = new Notification(player.getName(), NotificationType.AUTH_FAIL, "```Player : " + player.getName() + "\\u000A" + "Reason : Failed to submit the factor authentication ```");
     }
 
     public void loginfromDifferntIP(Player player, String oldIP, String newIP) {

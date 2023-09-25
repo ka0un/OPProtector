@@ -18,7 +18,9 @@ public class MainConfig {
 
     public String
     prefix,
-    pas_command;
+    pas_command,
+    discord_webhook;
+
 
     public int
     session_hours,
@@ -40,7 +42,13 @@ public class MainConfig {
     scan_for_blacklisted_permissions,
     scan_for_gamemode_creative,
     encrypt_passwords,
-    scan_on_join;
+    scan_on_join,
+    notify_op_join,
+    notify_op_leave,
+    notfy_auth_success,
+    notify_auth_failed,
+    notify_unauth_access;
+
 
 
 
@@ -65,6 +73,7 @@ public class MainConfig {
         loadLockdownSettings();
         loadScannerSettings();
         loadCommandsSettings();
+        loadDiscordNotifications();
     }
 
 
@@ -108,6 +117,17 @@ public class MainConfig {
         have_blacklisted_perms = new ArrayList<>(commands.getStringList("have-blacklisted-perms"));
         admin_ip_changed = new ArrayList<>(commands.getStringList("admin-ip-changed"));
         failed_password_timeout = new ArrayList<>(commands.getStringList("failed-password-timeout"));
+
+    }
+
+    private void loadDiscordNotifications(){
+        ConfigurationSection discord = config.getConfigurationSection("discord-notifications");
+        notify_op_join = discord.getBoolean("notify-op-join");
+        notify_op_leave = discord.getBoolean("notify-op-leave");
+        notfy_auth_success = discord.getBoolean("notfy-auth-success");
+        notify_auth_failed = discord.getBoolean("notify-auth-failed");
+        notify_unauth_access = discord.getBoolean("notify-unauth-access");
+        discord_webhook = discord.getString("discord-webhook");
 
     }
 

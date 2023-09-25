@@ -60,7 +60,6 @@ public class PasswordGui {
             }else{
                 isPasswordCorrect = false;
                 player.sendMessage(Prefix.ERROR + "You have entered the wrong password.");
-                plugin.getMainManager().getLog().failedPassword(player);
 
             }
         });

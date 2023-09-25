@@ -98,13 +98,15 @@ commands-settings:
   failed-password-timeout:
 
 #===============================================================================
-# Remote Notifier Settings
+# Discord Notifier Settings
 #===============================================================================
-remote-notifications:
-  discord-webhook:
-  authentication-passed-notification: true
-  authentication-failed-notification: true
-  unauthenticated-access-notification: true
+discord-notifications:
+  discord-webhook: ""
+  notify-op-join: true
+  notify-op-leave: true
+  notfy-auth-success : true
+  notify-auth-failed: true
+  notify-unauth-access: true
 
 
 

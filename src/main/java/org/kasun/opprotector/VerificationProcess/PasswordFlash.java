@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Utils.CommandExecutor;
+import org.kasun.opprotector.Utils.Log;
 import org.kasun.opprotector.Utils.Prefix;
 
 import java.util.List;
@@ -53,6 +54,8 @@ public class PasswordFlash {
                 } else {
                     List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().failed_password_timeout;
                     CommandExecutor commandExecutor = new CommandExecutor(player, commands);
+                    Log log = plugin.getMainManager().getLog();
+                    log.failedPassword(player);
                     player.kickPlayer(ChatColor.RED + "You have failed to enter the password in time.");
                     cancel();
                 }
