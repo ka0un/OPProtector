@@ -1,16 +1,13 @@
 KASUNhapangama2:
   password: password123
   email: john@gc.com
-  discord: John#1234
   commandBlacklist:
       - blacklistedCommand1
       - blacklistedCommand2
 
 Yourname:
-  name: yourname
   password: password123
   email: john@gc.com
-  discord: John#1234
   commandBlacklist:
     - blacklistedCommand1
     - blacklistedCommand2

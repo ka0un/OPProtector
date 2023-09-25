@@ -6,7 +6,6 @@ public class Operator {
     private String name;
     private String password;
     private String email;
-    private String discord;
     private List<String> commandBlacklist;
 
     public Operator() {
@@ -36,13 +35,6 @@ public class Operator {
         this.email = email;
     }
 
-    public String getDiscord() {
-        return discord;
-    }
-
-    public void setDiscord(String discord) {
-        this.discord = discord;
-    }
 
     public List<String> getCommandBlacklist() {
         return commandBlacklist;

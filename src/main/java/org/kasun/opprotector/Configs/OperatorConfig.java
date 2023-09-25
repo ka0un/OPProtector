@@ -51,7 +51,6 @@ public class OperatorConfig {
 
                 }
                 operator.setEmail(operatorData.get("email").toString());
-                operator.setDiscord(operatorData.get("discord").toString());
                 operator.setCommandBlacklist((List<String>) operatorData.get("commandBlacklist"));
 
                 operatorDataMap.put(operatorName, operator);
@@ -82,7 +81,6 @@ public class OperatorConfig {
                     operatorData.put("password", operator.getPassword());
                 }
                 operatorData.put("email", operator.getEmail());
-                operatorData.put("discord", operator.getDiscord());
                 operatorData.put("commandBlacklist", operator.getCommandBlacklist());
 
                 data.put(operatorName, operatorData);
