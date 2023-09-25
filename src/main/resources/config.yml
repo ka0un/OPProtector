@@ -104,7 +104,7 @@ discord-notifications:
   discord-webhook: ""
   notify-op-join: true
   notify-op-leave: true
-  notfy-auth-success : true
+  notify-auth-success : true
   notify-auth-failed: true
   notify-unauth-access: true
 

@@ -30,7 +30,6 @@ public class PlayerLeave implements Listener {
         }
         if (e.getPlayer().isOp()) {
             plugin.getMainManager().getLog().logout(e.getPlayer());
-            Notification notification = new Notification(e.getPlayer().getName(), NotificationType.LEAVE, "");
         }
     }
 }

@@ -45,7 +45,7 @@ public class MainConfig {
     scan_on_join,
     notify_op_join,
     notify_op_leave,
-    notfy_auth_success,
+    notify_auth_success,
     notify_auth_failed,
     notify_unauth_access;
 
@@ -124,7 +124,7 @@ public class MainConfig {
         ConfigurationSection discord = config.getConfigurationSection("discord-notifications");
         notify_op_join = discord.getBoolean("notify-op-join");
         notify_op_leave = discord.getBoolean("notify-op-leave");
-        notfy_auth_success = discord.getBoolean("notfy-auth-success");
+        notify_auth_success = discord.getBoolean("notify-auth-success");
         notify_auth_failed = discord.getBoolean("notify-auth-failed");
         notify_unauth_access = discord.getBoolean("notify-unauth-access");
         discord_webhook = discord.getString("discord-webhook");

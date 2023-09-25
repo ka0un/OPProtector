@@ -29,7 +29,6 @@ public class PlayerJoin implements Listener {
 
         if (player.isOp()) {
             log.login(player);
-            Notification notification = new Notification(player.getName(), NotificationType.JOIN, "");
         }
     }
 
