@@ -31,7 +31,7 @@ public class FactorsGuI {
         verificationProcessManager = OPProtector.getInstance().getMainManager().getVerificationProcessManager();
 
         //console access verification button
-        itemStackC = new ItemStack(Material.COAL_BLOCK);
+        itemStackC = new ItemStack(Material.LIME_WOOL);
         ItemMeta itemMetaC = itemStackC.getItemMeta();
         itemMetaC.setDisplayName(ChatColor.GREEN + "Verify Console Access");
         List<String> loreC = new ArrayList<>();
@@ -41,20 +41,20 @@ public class FactorsGuI {
 
 
         //Email verification button
-        itemStackE = new ItemStack(Material.REDSTONE_BLOCK);
+        itemStackE = new ItemStack(Material.OAK_BUTTON);
         ItemMeta itemMetaE = itemStackE.getItemMeta();
         itemMetaE.setDisplayName(ChatColor.RED + "Verify Email");
         List<String> loreE = new ArrayList<>();
-        loreE.add(ChatColor.GRAY + "Click to verify Email Address");
+        loreE.add(ChatColor.GRAY + "Comming Soon");
         itemMetaE.setLore(loreE);
         itemStackE.setItemMeta(itemMetaE);
 
         //Discord verification button
-        itemStackD = new ItemStack(Material.LAPIS_BLOCK);
+        itemStackD = new ItemStack(Material.OAK_BUTTON);
         ItemMeta itemMetaD = itemStackD.getItemMeta();
         itemMetaD.setDisplayName(ChatColor.BLUE + "Verify Discord");
         List<String> loreD = new ArrayList<>();
-        loreD.add(ChatColor.GRAY + "Click to verify Discord Account");
+        loreD.add(ChatColor.GRAY + "Comming Soon");
         itemMetaD.setLore(loreD);
         itemStackD.setItemMeta(itemMetaD);
 

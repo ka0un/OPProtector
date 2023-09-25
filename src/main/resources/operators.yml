@@ -1,13 +1,11 @@
 KASUNhapangama2:
   password: password123
-  email: john@gc.com
   commandBlacklist:
       - blacklistedCommand1
       - blacklistedCommand2
 
 Yourname:
   password: password123
-  email: john@gc.com
   commandBlacklist:
     - blacklistedCommand1
     - blacklistedCommand2

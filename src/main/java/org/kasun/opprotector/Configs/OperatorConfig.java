@@ -50,7 +50,6 @@ public class OperatorConfig {
                     operator.setPassword(operatorData.get("password").toString());
 
                 }
-                operator.setEmail(operatorData.get("email").toString());
                 operator.setCommandBlacklist((List<String>) operatorData.get("commandBlacklist"));
 
                 operatorDataMap.put(operatorName, operator);
@@ -80,7 +79,6 @@ public class OperatorConfig {
                 }else {
                     operatorData.put("password", operator.getPassword());
                 }
-                operatorData.put("email", operator.getEmail());
                 operatorData.put("commandBlacklist", operator.getCommandBlacklist());
 
                 data.put(operatorName, operatorData);
