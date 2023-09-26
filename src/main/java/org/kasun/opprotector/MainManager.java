@@ -1,5 +1,6 @@
 package org.kasun.opprotector;
 
+import org.bukkit.command.ConsoleCommandSender;
 import org.kasun.opprotector.AuthObjects.IpTable;
 import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.Scanner.LiveScanner;
@@ -9,8 +10,11 @@ import org.kasun.opprotector.Configs.ConfigManager;
 import org.kasun.opprotector.Listners.ListnerManager;
 import org.kasun.opprotector.Punishments.PunishmentManager;
 import org.kasun.opprotector.Utils.Log;
+import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.Utils.UpdateChecker;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
+import org.bukkit.Bukkit;
+import org.bukkit.event.HandlerList;
 
 public class MainManager {
     private ConfigManager configManager;
@@ -35,6 +39,23 @@ public class MainManager {
         ipTable = new IpTable();
         log = new Log();
         updateChecker = new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion());
+    }
+
+    public void reload() {
+        HandlerList.unregisterAll(plugin);
+        Bukkit.getScheduler().cancelTasks(plugin);
+        setConfigManager(new ConfigManager());
+        setListnerManager(new ListnerManager());
+        setPunishmentManager(new PunishmentManager());
+        setCommandsManager(new CommandsManager());
+        setTempAuth(new TempAuth());
+        setVerificationProcessManager(new VerificationProcessManager());
+        setLiveScanner(new LiveScanner());
+        setIpTable(new IpTable());
+        setLog(new Log());
+        setUpdateChecker(new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion()));
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        console.sendMessage(Prefix.SUCCESS + "OPProtector Reloaded");
     }
 
     public ConfigManager getConfigManager() {
@@ -73,4 +94,43 @@ public class MainManager {
         return log;
     }
 
+    public void setConfigManager(ConfigManager configManager) {
+        this.configManager = configManager;
+    }
+
+    public void setListnerManager(ListnerManager listnerManager) {
+        this.listnerManager = listnerManager;
+    }
+
+    public void setPunishmentManager(PunishmentManager punishmentManager) {
+        this.punishmentManager = punishmentManager;
+    }
+
+    public void setTempAuth(TempAuth tempAuth) {
+        this.tempAuth = tempAuth;
+    }
+
+    public void setCommandsManager(CommandsManager commandsManager) {
+        this.commandsManager = commandsManager;
+    }
+
+    public void setVerificationProcessManager(VerificationProcessManager verificationProcessManager) {
+        this.verificationProcessManager = verificationProcessManager;
+    }
+
+    public void setLiveScanner(LiveScanner liveScanner) {
+        this.liveScanner = liveScanner;
+    }
+
+    public void setIpTable(IpTable ipTable) {
+        this.ipTable = ipTable;
+    }
+
+    public void setLog(Log log) {
+        this.log = log;
+    }
+
+    public void setUpdateChecker(UpdateChecker updateChecker) {
+        this.updateChecker = updateChecker;
+    }
 }

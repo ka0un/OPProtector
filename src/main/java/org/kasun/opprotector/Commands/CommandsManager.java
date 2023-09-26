@@ -7,5 +7,6 @@ public class CommandsManager {
     public CommandsManager() {
         OPProtector plugin = OPProtector.getInstance();
         plugin.getCommand("pas").setExecutor(new Pas());
+        plugin.getCommand("opp").setExecutor(new OppCommand());
     }
 }

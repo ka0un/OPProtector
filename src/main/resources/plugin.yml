@@ -6,3 +6,6 @@ commands:
   pas:
     description: Operator Password
     usage: /<command> password
+  opp:
+    description: OPProtector Admin Command
+    usage: /<command>
