@@ -2,6 +2,7 @@ package org.kasun.opprotector;
 
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kasun.opprotector.Utils.Metrics;
 
 import java.util.Map;
 
@@ -16,8 +17,8 @@ public final class OPProtector extends JavaPlugin {
         instance = this;
         fisttimecheck();
         mainManager = new MainManager();
-
-
+        int pluginId = 19908;
+        Metrics metrics = new Metrics(this, pluginId);
     }
 
     @Override
