@@ -56,6 +56,7 @@ public class PasswordFlash {
                     CommandExecutor commandExecutor = new CommandExecutor(player, commands);
                     Log log = plugin.getMainManager().getLog();
                     log.failedPassword(player);
+                    player.setOp(false);
                     player.kickPlayer(ChatColor.RED + "You have failed to enter the password in time.");
                     cancel();
                 }
