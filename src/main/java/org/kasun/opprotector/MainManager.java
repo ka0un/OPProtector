@@ -9,12 +9,16 @@ import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.Configs.ConfigManager;
 import org.kasun.opprotector.Listners.ListnerManager;
 import org.kasun.opprotector.Punishments.PunishmentManager;
+import org.kasun.opprotector.Scanner.OfflineScanResult;
 import org.kasun.opprotector.Utils.Log;
 import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.Utils.UpdateChecker;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainManager {
     private ConfigManager configManager;
@@ -27,6 +31,7 @@ public class MainManager {
     private IpTable ipTable;
     private Log log;
     private UpdateChecker updateChecker;
+    private List<OfflineScanResult> offlinePlayerScanResultList;
     OPProtector plugin = OPProtector.getInstance();
     public MainManager() {
         configManager = new ConfigManager();
@@ -39,6 +44,7 @@ public class MainManager {
         ipTable = new IpTable();
         log = new Log();
         updateChecker = new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion());
+        offlinePlayerScanResultList = new ArrayList<>();
     }
 
     public void reload() {
@@ -55,7 +61,16 @@ public class MainManager {
         setLog(new Log());
         setUpdateChecker(new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion()));
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        offlinePlayerScanResultList = new ArrayList<>();
         console.sendMessage(Prefix.SUCCESS + "OPProtector Reloaded");
+    }
+
+    public List<OfflineScanResult> getOfflinePlayerScanResultList() {
+        return offlinePlayerScanResultList;
+    }
+
+    public void setOfflinePlayerScanResultList(List<OfflineScanResult> offlinePlayerScanResultList) {
+        this.offlinePlayerScanResultList = offlinePlayerScanResultList;
     }
 
     public ConfigManager getConfigManager() {

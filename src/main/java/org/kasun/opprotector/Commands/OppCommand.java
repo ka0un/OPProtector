@@ -1,8 +1,13 @@
 package org.kasun.opprotector.Commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.*;
+import org.bukkit.entity.Player;
 import org.kasun.opprotector.OPProtector;
+import org.kasun.opprotector.Punishments.Ban;
+import org.kasun.opprotector.Scanner.OfflineScanResult;
+import org.kasun.opprotector.Scanner.OfflineScanner;
 import org.kasun.opprotector.Utils.Prefix;
 
 import java.util.ArrayList;
@@ -24,14 +29,14 @@ public class OppCommand implements TabExecutor {
             return true;
         }
 
-        //View Command
+        //Scan Command
         if (args[0].equalsIgnoreCase("scan")) {
             if(!sender.hasPermission("opp-admin")) {
                 sender.sendMessage(Prefix.ERROR + "No Permission ! [opp-admin]");
                 return true;
             }
 
-            //offlineScanner Shuld be linked to here
+            OfflineScanner offlineScanner = new OfflineScanner(sender);
 
         }
 
@@ -52,6 +57,25 @@ public class OppCommand implements TabExecutor {
             }
             plugin.getMainManager().reload();
             sender.sendMessage(Prefix.SUCCESS + "OPProtector Reloaded");
+        }
+
+        if (args[0].equalsIgnoreCase("banall")) {
+            if(!sender.hasPermission("opp-admin")) {
+                sender.sendMessage(Prefix.ERROR + "No Permission ! [opp-admin]");
+                return true;
+            }
+            List<OfflineScanResult> resultList =  plugin.getMainManager().getOfflinePlayerScanResultList();
+            if (resultList.size() == 0){
+                sender.sendMessage(Prefix.SUCCESS + "No Players Detected");
+                return true;
+            }else{
+                for (OfflineScanResult result : resultList) {
+                    OfflinePlayer player = result.getPlayer();
+                    plugin.getServer().getBanList(org.bukkit.BanList.Type.NAME).addBan(player.getName(), "OPProtector Detected Unauthorized OP", null, "OPProtector");
+                }
+                sender.sendMessage(Prefix.SUCCESS + "Banned " + resultList.size() + " detected players");
+                plugin.getMainManager().getOfflinePlayerScanResultList().clear();
+            }
         }
         return true;
     }
@@ -100,7 +124,7 @@ public class OppCommand implements TabExecutor {
         if (args.length == 1) {
             List<String> arguments = new ArrayList<>();
             arguments.add("help");
-            arguments.add("view");
+            arguments.add("scan");
             arguments.add("reload");
             return arguments;
         }
