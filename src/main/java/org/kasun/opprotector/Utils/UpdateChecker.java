@@ -37,7 +37,7 @@ public class UpdateChecker {
                             plugin.getLogger().warning("Please update from: https://github.com/ka0un/OPProtector");
                             plugin.getLogger().warning("==============================================================");
                         } else {
-                            plugin.getLogger().warning("Your plugin is up to date! : " + latestVersion);
+                            plugin.getLogger().info("Your plugin is up to date! : " + latestVersion);
                         }
 
                         return; // Exit the loop after finding version information

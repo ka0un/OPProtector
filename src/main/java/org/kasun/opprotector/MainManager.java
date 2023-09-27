@@ -43,7 +43,7 @@ public class MainManager {
         liveScanner = new LiveScanner();
         ipTable = new IpTable();
         log = new Log();
-        updateChecker = new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion());
+        updateChecker = new UpdateChecker(plugin, "https://raw.githubusercontent.com/ka0un/OPProtector/master/ver.txt", plugin.getDescription().getVersion());
         offlinePlayerScanResultList = new ArrayList<>();
     }
 
