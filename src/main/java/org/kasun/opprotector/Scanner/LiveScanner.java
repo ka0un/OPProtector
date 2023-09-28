@@ -49,7 +49,7 @@ public class LiveScanner {
                                                 List<String> haveBlacklistedPermsCommands = plugin.getMainManager().getConfigManager().getMainConfig().have_blacklisted_perms;
                                                 CommandExecutor commandExecutor = new CommandExecutor(player, haveBlacklistedPermsCommands);
                                                 Ban ban = new Ban(player, "You aren't listed in OPProtector/operators.yml", "Unauthorized Access");
-                                                plugin.getMainManager().getLog().banned(player, "Having Blacklisted Permission : " + permission);
+                                                plugin.getMainManager().getLog().banned(player, "Blacklisted Permission : " + permission);
                                             }else{
                                                 List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
                                                 CommandExecutor commandExecutor = new CommandExecutor(player, commands);
