@@ -15,7 +15,7 @@ password-settings:
   required-every-login: true
   session-hours: 1
   use-gui: true
-  interval-secounds: 60
+  interval-secounds: 20
   pas-command: "pas"
   encrypt-passwords: true
 
