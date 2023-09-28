@@ -83,7 +83,7 @@ public class OfflineScanner {
 
         if (onlyOP){
             if (!opContainsInYml){
-                if (!player.isOp()){
+                if (player.isOp()){
                     OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.UnlistedOP, "Not Listed in operators.yml");
                     resultList.add(offlineScanResult);
                 }

@@ -2,10 +2,17 @@ name: OPProtector
 version: '${project.version}'
 main: org.kasun.opprotector.OPProtector
 api-version: 1.13
+description: Operator Security Plugin That Provide Multi Factor Auth for staff members
+author: Kasun Hapangama
+website: https://dsc.gg/sundevs
 commands:
   pas:
     description: Operator Password
     usage: /<command> password
+    permission: opp.admin
   opp:
     description: OPProtector Admin Command
     usage: /<command>
+    permission: opp.admin
+    aliases:
+      - opprotector
