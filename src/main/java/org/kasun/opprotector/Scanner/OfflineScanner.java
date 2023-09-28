@@ -1,15 +1,18 @@
 package org.kasun.opprotector.Scanner;
 
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.node.NodeType;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.kasun.opprotector.OPProtector;
+import org.kasun.opprotector.Utils.LuckpermsCheck;
 import org.kasun.opprotector.Utils.OfflineScannerResultType;
 import org.kasun.opprotector.Utils.Prefix;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 
 public class OfflineScanner {
     private CommandSender sender;
@@ -42,9 +45,16 @@ public class OfflineScanner {
             }
         }
 
+        boolean onlyOP = !isLuckPermsInstalledAndEnabled();
+
+        if (onlyOP){
+            sender.sendMessage(Prefix.WARNING + "LuckPerms not found, scanning for OPs only");
+        }
+
+
         int i = 1;
         for (OfflinePlayer player : offlinePlayers) {
-            scan(player);
+            scan(player, onlyOP);
             if (i != 0 && i % 10 == 0) {
                 sender.sendMessage(Prefix.INFO + "Scanned " + i + " / "+totalOfflinePlayers +" Players");
             }
@@ -63,44 +73,64 @@ public class OfflineScanner {
 
     }
 
-    private void scan(OfflinePlayer player){
+    private void scan(OfflinePlayer player, boolean onlyOP){
 
         if (player.isBanned()){
             return;
         }
 
-        boolean opContainsInYml = plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(player.getName());
-
-        for (String permission : blacklistedPermissions) {
-            try {
-                if ((player.getPlayer()).hasPermission(permission)) {
-                    if (!opContainsInYml) {
-                        if (!player.isOp()){
-                            OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.BlackListedPerms, "Having Blacklisted Permission : " + permission);
-                            resultList.add(offlineScanResult);
-                            return;
-                        }else{
-                            OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.UnlistedOP, "Not Listed in operators.yml");
-                            resultList.add(offlineScanResult);
-                            return;
-                        }
-
-                    }else{
-                        return;
-                    }
-                }
-            } catch (NullPointerException ignored) {
-            }
-        }
-
-        // Check if player is an OP
-        if (player.isOp()) {
-            if (!opContainsInYml) {
+        if (onlyOP){
+            if (player.isOp()){
                 OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.UnlistedOP, "Not Listed in operators.yml");
                 resultList.add(offlineScanResult);
+            }
+
+        }else{
+
+            boolean opContainsInYml = plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(player.getName());
+
+            for (String permission : blacklistedPermissions) {
+                try {
+                    if (LuckpermsCheck.hasPermission(player.getUniqueId(), permission)) {
+                        if (!opContainsInYml) {
+                            if (!player.isOp()){
+                                OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.BlackListedPerms, "Having Blacklisted Permission : " + permission);
+                                resultList.add(offlineScanResult);
+                                return;
+                            }else{
+                                OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.UnlistedOP, "Not Listed in operators.yml");
+                                resultList.add(offlineScanResult);
+                                return;
+                            }
+
+                        }else{
+                            return;
+                        }
+                    }
+                } catch (NullPointerException ignored) {
+                }
+            }
+
+            // Check if player is an OP
+            if (player.isOp()) {
+                if (!opContainsInYml) {
+                    OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.UnlistedOP, "Not Listed in operators.yml");
+                    resultList.add(offlineScanResult);
+                }
             }
         }
 
     }
+
+    private boolean isLuckPermsInstalledAndEnabled() {
+        Plugin luckPermsPlugin = Bukkit.getPluginManager().getPlugin("LuckPerms");
+        return luckPermsPlugin != null && luckPermsPlugin.isEnabled();
+    }
+
+
+
+
+
+
 
 }
