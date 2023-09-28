@@ -4,8 +4,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.kasun.opprotector.Discord.Notification;
-import org.kasun.opprotector.Discord.NotificationType;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Utils.Log;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;

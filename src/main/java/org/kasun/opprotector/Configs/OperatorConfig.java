@@ -1,16 +1,11 @@
 package org.kasun.opprotector.Configs;
 
-import com.sun.tools.javac.Main;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Utils.Encryption;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 public class OperatorConfig {

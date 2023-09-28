@@ -6,8 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Lockdown;
 import org.kasun.opprotector.Utils.Prefix;

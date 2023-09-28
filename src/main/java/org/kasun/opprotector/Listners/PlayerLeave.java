@@ -1,11 +1,9 @@
 package org.kasun.opprotector.Listners;
 
-import org.bukkit.entity.Player;
+
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.kasun.opprotector.Discord.Notification;
-import org.kasun.opprotector.Discord.NotificationType;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.VerificationProcess.PasswordFlash;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;

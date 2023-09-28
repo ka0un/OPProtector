@@ -3,7 +3,7 @@ package org.kasun.opprotector.Scanner;
 import org.bukkit.OfflinePlayer;
 import org.kasun.opprotector.Utils.OfflineScannerResultType;
 
-import java.util.ArrayList;
+
 
 public class OfflineScanResult {
     private OfflinePlayer player;

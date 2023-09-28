@@ -1,13 +1,12 @@
 package org.kasun.opprotector.VerificationProcess;
 
-import org.bukkit.Bukkit;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.kasun.opprotector.OPProtector;
-import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Utils.CommandExecutor;
 import org.kasun.opprotector.Utils.Log;
 import org.kasun.opprotector.Utils.Prefix;

@@ -5,7 +5,7 @@ import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Utils.Colors;
 import org.kasun.opprotector.inventories.ConsoleAccessVerificationGui;
 
-import java.util.ArrayList;
+
 
 public class ConsoleAccessVerification {
     private OPProtector plugin = OPProtector.getInstance();

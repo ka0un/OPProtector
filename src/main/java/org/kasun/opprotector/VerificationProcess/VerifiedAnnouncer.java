@@ -7,8 +7,7 @@ import org.bukkit.entity.Player;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Utils.Prefix;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Set;
 
 public class VerifiedAnnouncer {

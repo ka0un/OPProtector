@@ -1,7 +1,6 @@
 package org.kasun.opprotector.Scanner;
 
-import net.luckperms.api.LuckPermsProvider;
-import net.luckperms.api.node.NodeType;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.kasun.opprotector.OPProtector;

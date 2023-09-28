@@ -1,17 +1,12 @@
 package org.kasun.opprotector.VerificationProcess;
 
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Server;
+
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
-import org.kasun.opprotector.Configs.OperatorConfig;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.inventories.PasswordGui;
 
-import java.util.ArrayList;
+
 
 
 public class PasswordVerification {

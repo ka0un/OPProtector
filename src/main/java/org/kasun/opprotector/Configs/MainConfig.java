@@ -6,9 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.kasun.opprotector.OPProtector;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainConfig {
