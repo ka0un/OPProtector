@@ -5,6 +5,8 @@ api-version: 1.13
 description: Operator Security Plugin That Provide Multi Factor Auth for staff members
 author: Kasun Hapangama
 website: https://dsc.gg/sundevs
+softdepend:
+  - LuckPerms
 commands:
   pas:
     description: Operator Password

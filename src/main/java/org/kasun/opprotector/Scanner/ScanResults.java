@@ -1,6 +1,5 @@
 package org.kasun.opprotector.Scanner;
 
-import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -14,11 +13,7 @@ public class ScanResults {
     public ScanResults(List<OfflineScanResult> resultList, CommandSender sender) {
         this.resultList = resultList;
         this.sender = sender;
-
-        ChestGui gui = new ChestGui(6, "Scan Results");
-
         showResultsWithChat();
-
     }
 
 
