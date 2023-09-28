@@ -55,6 +55,7 @@ public class Notification {
     private void send(){
         DiscordWebhook webhook = new DiscordWebhook(plugin.getMainManager().getConfigManager().getMainConfig().discord_webhook);
         webhook.setUsername("OPProtector");
+        webhook.setAvatarUrl("https://raw.githubusercontent.com/ka0un/OPProtector/master/icon.png");
         webhook.addEmbed(new DiscordWebhook.EmbedObject()
                 .setThumbnail(avatar_url)
                 .setFooter(new Timestamp(System.currentTimeMillis()).toString())
