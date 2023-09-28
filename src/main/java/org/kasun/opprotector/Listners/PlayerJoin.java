@@ -15,8 +15,9 @@ public class PlayerJoin implements Listener {
         OPProtector plugin = OPProtector.getInstance();
         Log log = plugin.getMainManager().getLog();
         boolean allow = plugin.getMainManager().getConfigManager().getMainConfig().scan_on_join;
+        boolean scanFromLiveScan = plugin.getMainManager().getConfigManager().getMainConfig().scan_from_live_scanner;
 
-        if (plugin.getServer().getOnlinePlayers().size() == 1) {
+        if (plugin.getServer().getOnlinePlayers().size() == 1 && scanFromLiveScan){
             plugin.getMainManager().getLiveScanner().start();
         }
 

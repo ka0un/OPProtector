@@ -20,15 +20,6 @@ password-settings:
   encrypt-passwords: true
 
 #===============================================================================
-# Factor Authentication Settings
-#===============================================================================
-factor-auth:
-  2fa-enabled: true
-  required-every-login: true
-  console-access-verfication: true
-  email-verfication: true #not done yet
-
-#===============================================================================
 # Lockdown Settings
 #===============================================================================
 

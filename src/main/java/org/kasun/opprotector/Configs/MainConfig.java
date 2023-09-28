@@ -50,6 +50,7 @@ public class MainConfig {
 
 
 
+
     public List<String>
     commands_whitelist,
     not_in_operators_list,
@@ -128,6 +129,7 @@ public class MainConfig {
         discord_webhook = discord.getString("discord-webhook");
 
     }
+
 
 
 

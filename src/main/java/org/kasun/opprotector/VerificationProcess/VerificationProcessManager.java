@@ -3,6 +3,7 @@ package org.kasun.opprotector.VerificationProcess;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.kasun.opprotector.AuthObjects.IpTable;
+import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Punishments.Lockdown;
@@ -108,6 +109,7 @@ public class VerificationProcessManager {
 
         if (ipTable.IsContains(player)){
             plugin.getMainManager().getLog().loginfromDifferntIP(player, ipTable.getIp(player), player.getAddress().getAddress().getHostAddress());
+            CommandExecutor commandExecutor = new CommandExecutor(player, plugin.getMainManager().getConfigManager().getMainConfig().admin_ip_changed);
         }
 
         FactorsGuI factorsGuI = new FactorsGuI();
