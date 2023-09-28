@@ -77,16 +77,17 @@ public class OfflineScanner {
         if (player.isBanned()){
             return;
         }
+        boolean opContainsInYml = plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(player.getName());
+
 
         if (onlyOP){
+
             if (player.isOp()){
                 OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.UnlistedOP, "Not Listed in operators.yml");
                 resultList.add(offlineScanResult);
             }
 
         }else{
-
-            boolean opContainsInYml = plugin.getMainManager().getConfigManager().getOperatorConfig().isContains(player.getName());
 
             for (String permission : blacklistedPermissions) {
                 try {
