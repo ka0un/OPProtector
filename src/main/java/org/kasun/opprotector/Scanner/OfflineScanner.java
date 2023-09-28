@@ -93,7 +93,7 @@ public class OfflineScanner {
                     if (LuckpermsCheck.hasPermission(player.getUniqueId(), permission)) {
                         if (!opContainsInYml) {
                             if (!player.isOp()){
-                                OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.BlackListedPerms, "Having Blacklisted Permission : " + permission);
+                                OfflineScanResult offlineScanResult = new OfflineScanResult(player, OfflineScannerResultType.BlackListedPerms, "Permission : " + permission);
                                 resultList.add(offlineScanResult);
                                 return;
                             }else{
