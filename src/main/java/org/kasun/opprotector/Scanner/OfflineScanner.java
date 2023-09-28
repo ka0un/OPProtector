@@ -62,7 +62,7 @@ public class OfflineScanner {
         sender.sendMessage(Prefix.SUCCESS + "Finished Scanning");
 
         if (resultList == null|| resultList.size() == 0){
-            sender.sendMessage(Prefix.SUCCESS + "No Players Detected");
+            sender.sendMessage(Prefix.SUCCESS + "No Unauthorized Players Detected");
             return;
         }else{
             plugin.getMainManager().setOfflinePlayerScanResultList(resultList);
