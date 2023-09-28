@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -145,11 +147,19 @@ public class Log {
     private boolean cached(String message){
 
         //if theres something older than 3 secounds in the cache remove them
+
         if (cache.keySet() != null){
+
+            ArrayList<Timestamp> expiredtimestamps = new ArrayList<>();
+
             for (Timestamp timestamp : cache.keySet()){
                 if (timestamp.getTime() < System.currentTimeMillis() - 3000){
-                    cache.remove(timestamp);
+                    expiredtimestamps.add(timestamp);
                 }
+            }
+
+            for (Timestamp timestamp : expiredtimestamps){
+                cache.remove(timestamp);
             }
         }
 
