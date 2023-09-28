@@ -1,4 +1,4 @@
-![1x](https://github.com/ka0un/OPProtector/assets/88395585/118cf719-e100-4080-ab07-d32a1d51abcd)
+![1x-fixed](https://github.com/ka0un/OPProtector/assets/88395585/c3b39431-4b34-4155-b1e3-dc76458472cd)
 
 # OPProtector
 Protect Operator Accounts And Prevent Unautharized Access
