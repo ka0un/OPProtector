@@ -8,4 +8,8 @@
  - **Trello** : [https://trello.com/b/3Pl7ZSJ5/opprotector](https://trello.com/b/3Pl7ZSJ5/opprotector)
  - **Bstats** : [https://bstats.org/plugin/bukkit/OPProtector/19908](https://bstats.org/plugin/bukkit/OPProtector/19908)
 
+![Group (48)](https://github.com/ka0un/OPProtector/assets/88395585/097b9434-1cca-4377-8803-58ee1b815c6e)
+
+ > After signing in to GitHub, locate the 'Star' button on this page. Clicking on this button will ensure that you receive notifications regarding updates and the release of opp+. As a token of appreciation, upon release, you will be provided with a 100% discount coupon for builtByBit.
+
  ![1x](https://bstats.org/signatures/bukkit/OPProtector.svg)
