@@ -45,6 +45,7 @@ public class MainConfig {
     notify_op_leave,
     notify_auth_success,
     notify_auth_failed,
+    tfa_enabled,
     notify_unauth_access;
 
 
@@ -83,6 +84,7 @@ public class MainConfig {
         interval_secounds = password.getInt("interval-secounds");
         use_gui = password.getBoolean("use-gui");
         encrypt_passwords = password.getBoolean("encrypt-passwords");
+        tfa_enabled = password.getBoolean("2fa-enabled");
     }
 
     private void loadLockdownSettings(){

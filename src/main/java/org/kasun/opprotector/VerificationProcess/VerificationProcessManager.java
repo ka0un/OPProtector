@@ -97,6 +97,11 @@ public class VerificationProcessManager {
     }
 
     public void setTo2FA(Player player){
+
+        if (!plugin.getMainManager().getConfigManager().getMainConfig().tfa_enabled){
+            setVerified(player);
+        }
+
         passwordFlash.stopTasks();
         verificationStatusMap.put(player.getName(), VerificationStatus.IN_FACTOR_VERIFICATION);
         plugin.getMainManager().getAuthorizedPlayers().addAuthorizedPlayer(player);

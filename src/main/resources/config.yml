@@ -18,6 +18,7 @@ password-settings:
   interval-secounds: 20
   pas-command: "pas"
   encrypt-passwords: true
+  2fa-enabled: true
 
 #===============================================================================
 # Lockdown Settings
