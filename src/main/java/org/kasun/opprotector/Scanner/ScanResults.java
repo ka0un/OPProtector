@@ -26,6 +26,7 @@ public class ScanResults {
         sender.sendMessage(" ");
         sender.sendMessage(ChatColor.RED +  "Use /opp banall to ban all detected players");
     }
+
 }
 
 
