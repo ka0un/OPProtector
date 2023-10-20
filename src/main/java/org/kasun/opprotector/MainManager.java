@@ -61,7 +61,6 @@ public class MainManager {
         setUpdateChecker(new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion()));
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         offlinePlayerScanResultList = new ArrayList<>();
-        console.sendMessage(Prefix.SUCCESS + "OPProtector Reloaded");
     }
 
     public List<OfflineScanResult> getOfflinePlayerScanResultList() {
