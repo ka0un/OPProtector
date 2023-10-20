@@ -45,6 +45,7 @@ public class MainConfig {
     notify_auth_success,
     notify_auth_failed,
     notify_unauth_access,
+    check_for_bungeeguard,
     password_enabled;
 
 
@@ -107,6 +108,7 @@ public class MainConfig {
         scan_for_blacklisted_permissions = scanner.getBoolean("scan-for-blacklisted-permissions");
         scan_for_gamemode_creative = scanner.getBoolean("scan-for-gamemode-creative");
         scan_on_join = scanner.getBoolean("scan-on-join");
+        check_for_bungeeguard = scanner.getBoolean("check-for-bungeeguard");
         blacklisted_permissions = new ArrayList<>(scanner.getStringList("blacklisted-permissions"));
     }
 

@@ -9,6 +9,7 @@ import org.kasun.opprotector.Configs.ConfigManager;
 import org.kasun.opprotector.Listners.ListnerManager;
 import org.kasun.opprotector.Punishments.PunishmentManager;
 import org.kasun.opprotector.Scanner.OfflineScanResult;
+import org.kasun.opprotector.Utils.BungeeGuardChecker;
 import org.kasun.opprotector.Utils.Log;
 import org.kasun.opprotector.Utils.Prefix;
 import org.kasun.opprotector.Utils.UpdateChecker;
@@ -44,6 +45,7 @@ public class MainManager {
         log = new Log();
         updateChecker = new UpdateChecker(plugin, "https://raw.githubusercontent.com/ka0un/OPProtector/master/ver.txt", plugin.getDescription().getVersion());
         offlinePlayerScanResultList = new ArrayList<>();
+        BungeeGuardChecker.checkAndNotify();
     }
 
     public void reload() {
@@ -61,6 +63,7 @@ public class MainManager {
         setUpdateChecker(new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion()));
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         offlinePlayerScanResultList = new ArrayList<>();
+        BungeeGuardChecker.checkAndNotify();
     }
 
     public List<OfflineScanResult> getOfflinePlayerScanResultList() {
