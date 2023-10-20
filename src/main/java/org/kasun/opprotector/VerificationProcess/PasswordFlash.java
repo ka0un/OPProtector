@@ -31,8 +31,11 @@ public class PasswordFlash {
             @Override
             public void run() {
 
+                String titlebefore = ChatColor.GOLD + "OP" + ChatColor.YELLOW + "P";
+                String title = ChatColor.BOLD + titlebefore;
+
                     if (flash) {
-                        player.sendTitle(ChatColor.RED + "⚠", "", 0, 20, 0);
+                        player.sendTitle(title, ChatColor.RED + "█████████", 0, 15, 0);;
                         Sound sound = Sound.BLOCK_NOTE_BLOCK_HARP;
                         player.playSound(player.getLocation(), sound, 1, 1);
                     } else {
