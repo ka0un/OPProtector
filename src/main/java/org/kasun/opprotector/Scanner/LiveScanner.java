@@ -22,8 +22,7 @@ public class LiveScanner {
 
     public void start() {
         OPProtector plugin = OPProtector.getInstance();
-        int seconds = plugin.getMainManager().getConfigManager().getMainConfig().live_scanner_interval_secounds;
-        Long period = (long) (seconds * 20);
+        Long period = (long) (1 * 20);
         liveScannerTask = new BukkitRunnable() {
             @Override
             public void run() {
@@ -31,8 +30,7 @@ public class LiveScanner {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     VerificationStatus verificationStatus = verificationStatusMap.getOrDefault(player.getName(), VerificationStatus.NOT_VERIFIED);
 
-                    if (verificationStatus != VerificationStatus.VERIFIED && verificationStatus != VerificationStatus.IN_PASSWORD_VERIFICATION
-                            && verificationStatus != VerificationStatus.IN_FACTOR_VERIFICATION && verificationStatus != VerificationStatus.DOING_FACTOR_VERIFICATION) {
+                    if (verificationStatus != VerificationStatus.VERIFIED && verificationStatus != VerificationStatus.IN_PASSWORD_VERIFICATION) {
 
                         List<String> blacklistedPermissions = plugin.getMainManager().getConfigManager().getMainConfig().blacklisted_permissions;
                         boolean allowScanCreative = plugin.getMainManager().getConfigManager().getMainConfig().scan_for_gamemode_creative;

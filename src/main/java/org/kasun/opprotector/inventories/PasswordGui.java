@@ -55,7 +55,7 @@ public class PasswordGui {
 
                 isPasswordCorrect = true;
                 player.closeInventory();
-                verificationProcessManager.setTo2FA(player);
+                verificationProcessManager.setVerified(player);
 
             }else{
                 isPasswordCorrect = false;
@@ -73,7 +73,7 @@ public class PasswordGui {
                 if (attempts < 20){
                     isPasswordCorrect = true;
                     player.closeInventory();
-                    verificationProcessManager.setTo2FA(player);
+                    verificationProcessManager.setVerified(player);
                 }
             }
         });

@@ -22,8 +22,7 @@ public class MainConfig {
 
     public int
     session_hours,
-    interval_secounds,
-    live_scanner_interval_secounds;
+    interval_secounds;
 
     public boolean
     use_gui,
@@ -45,8 +44,8 @@ public class MainConfig {
     notify_op_leave,
     notify_auth_success,
     notify_auth_failed,
-    tfa_enabled,
-    notify_unauth_access;
+    notify_unauth_access,
+    password_enabled;
 
 
 
@@ -84,7 +83,7 @@ public class MainConfig {
         interval_secounds = password.getInt("interval-secounds");
         use_gui = password.getBoolean("use-gui");
         encrypt_passwords = password.getBoolean("encrypt-passwords");
-        tfa_enabled = password.getBoolean("2fa-enabled");
+        password_enabled = password.getBoolean("enabled");
     }
 
     private void loadLockdownSettings(){
@@ -109,7 +108,6 @@ public class MainConfig {
         scan_for_gamemode_creative = scanner.getBoolean("scan-for-gamemode-creative");
         scan_on_join = scanner.getBoolean("scan-on-join");
         blacklisted_permissions = new ArrayList<>(scanner.getStringList("blacklisted-permissions"));
-        live_scanner_interval_secounds = scanner.getInt("live-scanner-interval-secounds");
     }
 
     private void loadCommandsSettings(){

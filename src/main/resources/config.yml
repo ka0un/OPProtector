@@ -12,13 +12,12 @@
 #===============================================================================
 
 password-settings:
-  required-every-login: true
-  session-hours: 1
+  enabled: true
+  session-hours: 24
   use-gui: true
   interval-secounds: 20
   pas-command: "pas"
   encrypt-passwords: true
-  2fa-enabled: true
 
 #===============================================================================
 # Lockdown Settings
@@ -50,7 +49,6 @@ scanner-settings:
   scan-on-player-op-command: true
   scan-on-console-op-command: true
   scan-from-live-scanner: true
-  live-scanner-interval-secounds: 5
   scan-for-blacklisted-permissions: true
   scan-for-gamemode-creative: true
   blacklisted-permissions:
@@ -87,7 +85,6 @@ commands-settings:
 
   have-blacklisted-perms:
     - 'deop %player%'
-    - 'lp user %player% permission clear *'
 
   admin-ip-changed:
 

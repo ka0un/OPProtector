@@ -3,12 +3,10 @@ package org.kasun.opprotector.VerificationProcess;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.kasun.opprotector.AuthObjects.IpTable;
-import org.kasun.opprotector.Commands.CommandsManager;
 import org.kasun.opprotector.OPProtector;
 import org.kasun.opprotector.Punishments.Ban;
 import org.kasun.opprotector.Punishments.Lockdown;
 import org.kasun.opprotector.Utils.CommandExecutor;
-import org.kasun.opprotector.inventories.FactorsGuI;
 
 import java.util.HashMap;
 import java.util.List;
@@ -81,10 +79,24 @@ public class VerificationProcessManager {
 
 
         //checking if player is in verification process
-        if (verificationStatusMap.containsKey(player.getName()) && verificationStatusMap.get(player.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION || verificationStatusMap.get(player.getName()) == VerificationStatus.IN_FACTOR_VERIFICATION || verificationStatusMap.get(player.getName()) == VerificationStatus.DOING_FACTOR_VERIFICATION){
+        if (verificationStatusMap.containsKey(player.getName()) && verificationStatusMap.get(player.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION){
             return;
         }
 
+        //checking if operator loged in using same ip
+        ipTable = plugin.getMainManager().getIpTable();
+        if (ipTable.IsContains(player) && ipTable.isIp(player)){
+            VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
+            verificationStatusMap.put(player.getName(), VerificationStatus.VERIFIED);
+            return;
+        }
+
+        //checking if passwords enabled
+        if (!plugin.getMainManager().getConfigManager().getMainConfig().password_enabled){
+            VerifiedAnnouncer verifiedAnnouncer = new VerifiedAnnouncer(player);
+            verificationStatusMap.put(player.getName(), VerificationStatus.VERIFIED);
+            return;
+        }
 
         //start password verification process
         verificationStatusMap.put(player.getName(), VerificationStatus.IN_PASSWORD_VERIFICATION);
@@ -96,32 +108,11 @@ public class VerificationProcessManager {
 
     }
 
-    public void setTo2FA(Player player){
-
-        if (!plugin.getMainManager().getConfigManager().getMainConfig().tfa_enabled){
-            setVerified(player);
-        }
+    public void setVerified(Player player){
 
         passwordFlash.stopTasks();
-        verificationStatusMap.put(player.getName(), VerificationStatus.IN_FACTOR_VERIFICATION);
         plugin.getMainManager().getAuthorizedPlayers().addAuthorizedPlayer(player);
 
-        ipTable = plugin.getMainManager().getIpTable();
-        if (ipTable.IsContains(player) && ipTable.isIp(player)){
-            setVerified(player);
-            return;
-        }
-
-        if (ipTable.IsContains(player)){
-            plugin.getMainManager().getLog().loginfromDifferntIP(player, ipTable.getIp(player), player.getAddress().getAddress().getHostAddress());
-            CommandExecutor commandExecutor = new CommandExecutor(player, plugin.getMainManager().getConfigManager().getMainConfig().admin_ip_changed);
-        }
-
-        FactorsGuI factorsGuI = new FactorsGuI();
-        factorsGuI.show(player);
-    }
-
-    public void setVerified(Player player){
         ipTable = plugin.getMainManager().getIpTable();
         ipTable.addIp(player);
 

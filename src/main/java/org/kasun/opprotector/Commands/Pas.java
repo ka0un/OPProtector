@@ -25,7 +25,7 @@ public class Pas implements CommandExecutor {
                         String correctPassword = plugin.getMainManager().getConfigManager().getOperatorConfig().getOperator(player.getName()).getPassword();
                         if (password.equals(correctPassword)) {
                             VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
-                            verificationProcessManager.setTo2FA(player);
+                            verificationProcessManager.setVerified(player);
                             return true;
                         } else {
                             player.sendMessage(Prefix.ERROR + "Incorrect password.");
