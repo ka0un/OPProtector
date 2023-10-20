@@ -1,6 +1,6 @@
 #
 # ██████╗ ██████╗ ██████╗         OPProtector 2023 (Operator Security System)
-# ██╔═══██╗██╔══██╗██╔══██╗       Version: 1.0.1
+# ██╔═══██╗██╔══██╗██╔══██╗       Version: 1.0.2
 # ██║   ██║██████╔╝██████╔╝       Contributors: Kasun Hapangama(ka0un)
 # ██║   ██║██╔═══╝ ██╔═══╝        GitHub:https://github.com/ka0un/OPProtector
 # ╚██████╔╝██║     ██║            Discord:https://dsc.gg/sundevs
@@ -12,12 +12,12 @@
 #===============================================================================
 
 password-settings:
-  enabled: true
-  session-hours: 24
-  use-gui: true
-  interval-secounds: 20
-  pas-command: "pas"
-  encrypt-passwords: true
+  enabled: true # you can disable the password in the lobby server  (since you have login system)
+  session-hours: 24 # how many hours the password will be valid
+  use-gui: true # use gui to enter the password
+  interval-secounds: 20 # within how many secounds the player should enter the password
+  pas-command: "pas" # the command to open the password gui
+  encrypt-passwords: true # encrypt the passwords in the config file
 
 #===============================================================================
 # Lockdown Settings
@@ -32,7 +32,7 @@ lockdown-settings:
   block-item-pickup: true
   block-damage: true
   allow-flight: false
-  commands-whitelist:
+  commands-whitelist: # commands that are allowed to execute while lockdown
     - "/pas"
     - "/auth"
     - "/register"
@@ -57,6 +57,7 @@ scanner-settings:
     - "*"
     - "bungeecord.command.*"
     - "minecraft.command.*"
+    - "bungeecord.*"
     - "fawe.*"
     - "worledit.*"
     - "bukkit.*"
