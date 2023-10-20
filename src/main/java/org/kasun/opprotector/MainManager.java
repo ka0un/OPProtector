@@ -45,7 +45,6 @@ public class MainManager {
         log = new Log();
         updateChecker = new UpdateChecker(plugin, "https://raw.githubusercontent.com/ka0un/OPProtector/master/ver.txt", plugin.getDescription().getVersion());
         offlinePlayerScanResultList = new ArrayList<>();
-        BungeeGuardChecker.checkAndNotify();
     }
 
     public void reload() {
@@ -63,7 +62,6 @@ public class MainManager {
         setUpdateChecker(new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion()));
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         offlinePlayerScanResultList = new ArrayList<>();
-        BungeeGuardChecker.checkAndNotify();
     }
 
     public List<OfflineScanResult> getOfflinePlayerScanResultList() {
