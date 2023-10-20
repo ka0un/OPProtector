@@ -10,10 +10,6 @@ public class BungeeGuardChecker {
 
         OPProtector plugin = OPProtector.getInstance();
 
-        if (!plugin.getMainManager().getConfigManager().getMainConfig().check_for_bungeeguard) {
-            return;
-        }
-
         boolean onlineMode = Bukkit.getServer().getOnlineMode();
 
         if (!onlineMode && !isBungeeGuardInstalled()) {

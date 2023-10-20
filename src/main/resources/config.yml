@@ -51,7 +51,6 @@ scanner-settings:
   scan-from-live-scanner: true
   scan-for-blacklisted-permissions: true
   scan-for-gamemode-creative: true
-  check-for-bungeeguard: true
   blacklisted-permissions:
     - "essentials.*"
     - "*"
