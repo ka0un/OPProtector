@@ -87,7 +87,7 @@ public class OppCommand implements TabExecutor {
         //Info
         sender.sendMessage(ChatColor.GOLD +  "OPProtector v" + plugin.getDescription().getVersion());
         sender.sendMessage(ChatColor.YELLOW + "Author: " + ChatColor.WHITE +  plugin.getDescription().getAuthors());
-        sender.sendMessage(ChatColor.YELLOW + "Website: " + ChatColor.WHITE + plugin.getDescription().getWebsite());
+        sender.sendMessage(ChatColor.YELLOW + "Doc: " + ChatColor.WHITE + plugin.getDescription().getWebsite());
 
         //discord
         sender.sendMessage(ChatColor.YELLOW + "Discord: "+ ChatColor.WHITE +" https://dsc.gg/sundevs");
