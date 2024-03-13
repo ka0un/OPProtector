@@ -9,3 +9,5 @@ Yourname:
   commandBlacklist:
     - blacklistedCommand1
     - blacklistedCommand2
+
+#make sure to do /opp reload after changeing this file
