@@ -89,15 +89,28 @@ public class LiveScanner {
     }
 
     private void executeCommandsAndBanPlayer(Player player, String banReason, String logReason, OPProtector plugin) {
-        List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
-        CommandExecutor commandExecutor = new CommandExecutor(player, commands);
-        Ban ban = new Ban(player, banReason, logReason);
-        plugin.getMainManager().getLog().banned(player, logReason);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                List<String> commands = plugin.getMainManager().getConfigManager().getMainConfig().not_in_operators_list;
+                CommandExecutor commandExecutor = new CommandExecutor(player, commands);
+                Ban ban = new Ban(player, banReason, logReason);
+                plugin.getMainManager().getLog().banned(player, logReason);
+            }
+        }.runTask(plugin);
+
+
     }
 
     private void verify(Player player, OPProtector plugin) {
-        VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
-        verificationProcessManager.start(player);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
+                verificationProcessManager.start(player);
+            }
+        }.runTask(plugin);
     }
 
     public void stop() {
