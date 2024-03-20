@@ -10,13 +10,14 @@ import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 import org.kasun.opprotector.VerificationProcess.VerificationStatus;
 
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerLeave implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerLeave(org.bukkit.event.player.PlayerQuitEvent e){
         OPProtector plugin = OPProtector.getInstance();
         VerificationProcessManager verificationProcessManager = plugin.getMainManager().getVerificationProcessManager();
-        HashMap<String, VerificationStatus> verificationStatusMap = verificationProcessManager.getVerificationStatusMap();
+        ConcurrentHashMap<String, VerificationStatus> verificationStatusMap = verificationProcessManager.getVerificationStatusMap();
         if (plugin.getServer().getOnlinePlayers().size() == 1) {
             plugin.getMainManager().getLiveScanner().stop();
         }

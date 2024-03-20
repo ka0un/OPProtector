@@ -13,6 +13,7 @@ import org.kasun.opprotector.VerificationProcess.VerificationStatus;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class LiveScanner {
     private BukkitTask liveScannerTask;
@@ -26,7 +27,7 @@ public class LiveScanner {
         liveScannerTask = new BukkitRunnable() {
             @Override
             public void run() {
-                HashMap<String, VerificationStatus> verificationStatusMap = plugin.getMainManager().getVerificationProcessManager().getVerificationStatusMap();
+                ConcurrentHashMap<String, VerificationStatus> verificationStatusMap = plugin.getMainManager().getVerificationProcessManager().getVerificationStatusMap();
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     VerificationStatus verificationStatus = verificationStatusMap.getOrDefault(player.getName(), VerificationStatus.NOT_VERIFIED);
 
