@@ -78,12 +78,18 @@ public class PasswordGui {
             }
         });
         gui.setOnGlobalClick(event -> event.setCancelled(true));
+
+        // inventory close event
+        /*
         gui.setOnClose(event -> {
             OPProtector plugin = OPProtector.getInstance();
             if (verificationProcessManager.getVerificationStatusMap().get(player.getName()) == VerificationStatus.IN_PASSWORD_VERIFICATION){
                 gui.show(player);
             }
+
         });
+        */
+
         gui.show(player);
 
     }
