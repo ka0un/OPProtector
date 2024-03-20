@@ -96,11 +96,11 @@ commands-settings:
 #===============================================================================
 discord-notifications:
   discord-webhook: ""
-  notify-op-join: true
-  notify-op-leave: true
-  notify-auth-success : true
-  notify-auth-failed: true
-  notify-unauth-access: true
+  notify-op-join: false
+  notify-op-leave: false
+  notify-auth-success : false
+  notify-auth-failed: false
+  notify-unauth-access: false
 
 
 

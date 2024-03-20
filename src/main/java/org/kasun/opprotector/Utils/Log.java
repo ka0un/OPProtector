@@ -17,7 +17,6 @@ import java.util.HashMap;
 
 public class Log {
     private File logFile;
-
     private HashMap<Timestamp, String> cache;
 
 
