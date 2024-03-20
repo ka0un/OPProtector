@@ -2,6 +2,7 @@ package org.kasun.opprotector;
 
 import org.bukkit.command.ConsoleCommandSender;
 import org.kasun.opprotector.AuthObjects.IpTable;
+import org.kasun.opprotector.Listners.LuckPermUpdate;
 import org.kasun.opprotector.Scanner.LiveScanner;
 import org.kasun.opprotector.AuthObjects.TempAuth;
 import org.kasun.opprotector.Commands.CommandsManager;
@@ -30,6 +31,7 @@ public class MainManager {
     private Log log;
     private UpdateChecker updateChecker;
     private List<OfflineScanResult> offlinePlayerScanResultList;
+    private LuckPermUpdate luckPermUpdate;
     OPProtector plugin = OPProtector.getInstance();
     public MainManager() {
         configManager = new ConfigManager();
@@ -38,11 +40,12 @@ public class MainManager {
         commandsManager = new CommandsManager();
         tempAuth = new TempAuth();
         verificationProcessManager = new VerificationProcessManager();
-        liveScanner = new LiveScanner();
+        liveScanner = new LiveScanner(configManager);
         ipTable = new IpTable();
         log = new Log();
         updateChecker = new UpdateChecker(plugin, "https://raw.githubusercontent.com/ka0un/OPProtector/master/ver.txt", plugin.getDescription().getVersion());
         offlinePlayerScanResultList = new ArrayList<>();
+        luckPermUpdate = new LuckPermUpdate();
     }
 
     public void reload() {
@@ -54,12 +57,13 @@ public class MainManager {
         setCommandsManager(new CommandsManager());
         setTempAuth(new TempAuth());
         setVerificationProcessManager(new VerificationProcessManager());
-        setLiveScanner(new LiveScanner());
+        setLiveScanner(new LiveScanner(configManager));
         setIpTable(new IpTable());
         setLog(new Log());
         setUpdateChecker(new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion()));
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         offlinePlayerScanResultList = new ArrayList<>();
+        luckPermUpdate = new LuckPermUpdate();
     }
 
     public List<OfflineScanResult> getOfflinePlayerScanResultList() {
