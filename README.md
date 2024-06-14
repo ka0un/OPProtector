@@ -3,6 +3,13 @@
 # OPProtector
 > Protect Operator Accounts And Prevent Unautharized Access
 
+![GitHub Release](https://img.shields.io/github/v/release/ka0un/OPProtector?color=fa9d01)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/ka0un/OPProtector/latest?color=fa9d01)
+![bStats Servers](https://img.shields.io/bstats/servers/19908?color=fa9d01)
+![bStats Players](https://img.shields.io/bstats/players/19908?color=fa9d01)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/ka0un/OPProtector/total?color=fa9d01)
+![GitHub Repo stars](https://img.shields.io/github/stars/ka0un/OPProtector?color=fa9d01)
+
  - **Spigot** : [https://www.spigotmc.org/resources/opprotector.112840/](https://www.spigotmc.org/resources/opprotector.112840/)
  - **BuiltByBit** : [https://builtbybit.com/resources/opprotector.32501/](https://builtbybit.com/resources/opprotector.32501/)
  - **Trello** : [https://trello.com/b/3Pl7ZSJ5/opprotector](https://trello.com/b/3Pl7ZSJ5/opprotector)
