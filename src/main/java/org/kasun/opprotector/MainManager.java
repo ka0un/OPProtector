@@ -11,7 +11,6 @@ import org.kasun.opprotector.Listners.ListnerManager;
 import org.kasun.opprotector.Punishments.PunishmentManager;
 import org.kasun.opprotector.Scanner.OfflineScanResult;
 import org.kasun.opprotector.Utils.Log;
-import org.kasun.opprotector.Utils.UpdateChecker;
 import org.kasun.opprotector.VerificationProcess.VerificationProcessManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
@@ -29,7 +28,6 @@ public class MainManager {
     private LiveScanner liveScanner;
     private IpTable ipTable;
     private Log log;
-    private UpdateChecker updateChecker;
     private List<OfflineScanResult> offlinePlayerScanResultList;
     private LuckPermUpdate luckPermUpdate;
     OPProtector plugin = OPProtector.getInstance();
@@ -43,7 +41,6 @@ public class MainManager {
         liveScanner = new LiveScanner(configManager);
         ipTable = new IpTable();
         log = new Log();
-        updateChecker = new UpdateChecker(plugin, "https://raw.githubusercontent.com/ka0un/OPProtector/master/ver.txt", plugin.getDescription().getVersion());
         offlinePlayerScanResultList = new ArrayList<>();
         luckPermUpdate = new LuckPermUpdate();
     }
@@ -60,7 +57,6 @@ public class MainManager {
         setLiveScanner(new LiveScanner(configManager));
         setIpTable(new IpTable());
         setLog(new Log());
-        setUpdateChecker(new UpdateChecker(plugin, "https://github.com/ka0un/OPProtector/blob/master/ver.txt", plugin.getDescription().getVersion()));
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         offlinePlayerScanResultList = new ArrayList<>();
         luckPermUpdate = new LuckPermUpdate();
@@ -146,7 +142,4 @@ public class MainManager {
         this.log = log;
     }
 
-    public void setUpdateChecker(UpdateChecker updateChecker) {
-        this.updateChecker = updateChecker;
-    }
 }

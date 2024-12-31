@@ -6,7 +6,7 @@
 
     <groupId>org.kasun</groupId>
     <artifactId>OPProtector</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
 
     <name>OPProtector</name>
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>com.github.stefvanschie.inventoryframework</groupId>
             <artifactId>IF</artifactId>
-            <version>0.10.13</version>
+            <version>0.10.19</version>
         </dependency>
         <dependency>
             <groupId>org.yaml</groupId>
