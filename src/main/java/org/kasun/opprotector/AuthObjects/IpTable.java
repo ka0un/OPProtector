@@ -17,10 +17,7 @@ public class IpTable {
 
     public boolean IsContains(Player player){
         String playerName = player.getName();
-        if (ipTable.containsKey(playerName)){
-            return true;
-        }
-        return false;
+        return ipTable.containsKey(playerName);
     }
 
     public void addIp(Player player) {
@@ -34,9 +31,7 @@ public class IpTable {
         String playerName = player.getName();
         String playerIp = player.getAddress().getAddress().getHostAddress();
         if (ipTable.containsKey(playerName)) {
-            if (ipTable.get(playerName).equals(playerIp)) {
-                return true;
-            }
+            return ipTable.get(playerName).equals(playerIp);
         }
         return false;
     }

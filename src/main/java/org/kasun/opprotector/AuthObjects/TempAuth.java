@@ -20,9 +20,7 @@ public class TempAuth {
     public boolean isAuthorizedPlayer(Player player){
         int time = (int) plugin.getMainManager().getConfigManager().getMainConfig().session_hours;
         if(authorizedPlayers.containsKey(player.getName())){
-            if (authorizedPlayers.get(player.getName()).getTime() + (3600000 * time) > System.currentTimeMillis()) {
-                return true;
-            }
+            return authorizedPlayers.get(player.getName()).getTime() + (3600000 * time) > System.currentTimeMillis();
         }
         return false;
     }
