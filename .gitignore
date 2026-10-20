@@ -1,2 +1,10 @@
 # Project exclude paths
 /target/
+
+# SunLicense build secrets
+sunlicense.properties
+*.local.properties
+.env
+
+# Testing environment
+test-server/
